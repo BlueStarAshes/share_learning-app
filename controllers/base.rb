@@ -13,11 +13,10 @@ class ShareLearningApp < Sinatra::Base
   configure do
     Econfig.env = settings.environment.to_s
     Econfig.root = File.expand_path('..', settings.root)
-    # Setting Youtube API key
-    YouTube::YouTubeAPI.config.update(api_key: config.YOUTUBE_API_KEY)
+
   end
 
-  use Rack::Session::Cookie, secret: ShareLearningApp.config.SECRET
+  use Rack::Session::Cookie, secret: ShareLearningApp.config.YOUTUBE_API_KEY
   use Rack::Flash
 
   set :views, File.expand_path('../../views', __FILE__)
