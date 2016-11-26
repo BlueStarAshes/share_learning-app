@@ -4,21 +4,34 @@ require 'json'
 class ShareLearningApp < Sinatra::Base
   extend Econfig::Shortcut
 
-  get "/search/:search_keyword/?" do
-    results = GetSearchCourse.call(params)
-    search = JSON.parse(results.value)
-    coursera = search["coursera"]["courses"]
-    udacity = search["udacity"]["courses"]
-    youtube = search["youtube"]["courses"]
-
+  get "/search" do
+    search_keyword = Search.call(params)
+    results = GetSearchCourse.call(search_keyword)
+    
     if results.success?
-      @keyword = params[:search_keyword]
-      @coursera = coursera
-      @coursera_count = search["coursera"]["count"]
-      @udacity = udacity
-      @udacity_count = search["udacity"]["count"]
-      @youtube = youtube
-      @youtube_count = search["youtube"]["count"]
+      search = JSON.parse(results.value)
+      begin
+        @coursera = search["coursera"]["courses"]
+        @coursera_count = search["coursera"]["count"]
+      rescue 
+        @coursera = nil
+        @coursera_count = 0
+      end
+      begin
+        @udacity = search["udacity"]["courses"]
+        @udacity_count = search["udacity"]["count"]
+      rescue 
+        @udacity = nil
+        @udacity_count = 0
+      end
+      begin
+        @youtube = search["youtube"]["courses"]
+        @youtube_count = search["youtube"]["count"]
+      rescue 
+        @youtube = nil
+        @youtube_count = 0
+      end          
+      @keyword = search_keyword.output[:search_keyword]
     else
        flash[:error] = result.value.message
     end
@@ -26,3 +39,4 @@ class ShareLearningApp < Sinatra::Base
     slim :search
   end
 end
+
