@@ -6,8 +6,7 @@ class GetCoursesOverview
 
   def self.call
     results = HTTP.get("#{ShareLearningApp.config.ShareLearning_API}/overview")
-    Right(OverviewResultRepresenter.new(OverviewResult.new)
-                                   .from_json(results.body))
+    Right(results)
   rescue
     Left(Error.new('Our servers failed - we are investigating!'))
   end
