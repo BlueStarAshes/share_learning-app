@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'json'
 
 # Share Learning API web service
 class ShareLearningApp < Sinatra::Base
