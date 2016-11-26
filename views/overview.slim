@@ -1,5 +1,6 @@
 div class="row" style="vertical-align: bottom;"
-  div class="col-lg-6"
+  div class="col-lg-2"
+  div class="col-lg-8"
     div class="input-group"
       input{
         type="text"
@@ -11,6 +12,15 @@ div class="row" style="vertical-align: bottom;"
           class="btn btn-default"
           type="button"
         } Go!
+  div class="col-lg-2"
 
-
-/ include :group_new_modal_partial
+div class="row"
+  div class="col-sm-6 col-md-4"
+    h3 Coursera
+    p #{@data&.coursera_count} courses
+  div class="col-sm-6 col-md-4"
+    h3 Udacity
+    p #{@data&.udacity_count} courses
+  div class="col-sm-6 col-md-4"
+    h3 Youtube
+    p #{@data&.youtube_count} courses
