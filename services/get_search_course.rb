@@ -5,7 +5,7 @@ class GetSearchCourse
   extend Dry::Monads::Either::Mixin
 
   def self.call(params)
-  	keyword = (params[:search_keyword].split(' ')).join("+")
+    keyword = (params[:search_keyword].split(' ')).join("+")
     results = HTTP.get("#{ShareLearningApp.config.ShareLearning_API}/search/"+keyword)
     Right(results.body)
   rescue
