@@ -1,24 +1,26 @@
 div class="row" style="vertical-align: bottom;"
   div class="col-lg-2"
   div class="col-lg-8"
-    div class="input-group"
-      input{
-        type="text"
-        class="form-control"
-        placeholder="Search for..."
-      }
-      span class="input-group-btn"
-        button{
-          class="btn btn-default"
-          type="button"
-        } Go!
+    form role="form" action="/search" method='get' id='new-group-form'
+      div class="input-group"
+        input{
+          type="text"
+          class="form-control" name="search_keyword" class="form-control"
+          placeholder="Search for..."
+        }
+        span class="input-group-btn"
+          button{
+            class="btn btn-default"
+            type='submit'
+          } Go!
+    div class="col-lg-2"
 p 
 div class="table-container"  
-  p class="text-left"  Results for: '#{(@keyword.split('+')).join(" ")}'
+  p class="text-left"  Results for: '#{@keyword}'
     (Udacity: #{@udacity_count}, Coursera: #{@coursera_count}, YouTube: #{@youtube_count})
   table class="table table-filter"
     tbody
-      - @udacity.each do |c|
+      - @udacity&.each do |c|
         tr 
           td 
           td
@@ -43,7 +45,7 @@ div class="table-container"
             onclick="location.href = '#{c["resource_url"]}';"
             }
 
-      - @coursera.each do |c|
+      - @coursera&.each do |c|
         tr 
           td
           td
@@ -68,7 +70,7 @@ div class="table-container"
             onclick="location.href = '#{c["resource_url"]}';"
             }
  
-      - @youtube.each do |c|
+      - @youtube&.each do |c|
         tr 
           td
           td
