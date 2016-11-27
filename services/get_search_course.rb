@@ -9,6 +9,6 @@ class GetSearchCourse
     results = HTTP.get("#{ShareLearningApp.config.ShareLearning_API}/search/"+keyword)
     Right(results.body)
   rescue
-    Left(Error.new('Our servers failed - we are investigating!'))
+    Left(Error.new('Please enter an keyword'))
   end
 end
