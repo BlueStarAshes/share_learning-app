@@ -8,7 +8,7 @@ class ShareLearningApp < Sinatra::Base
     search_keyword = Search.call(params)
     results = GetSearchCourse.call(search_keyword)
     
-    if results.success?
+    if results.success? 
       search = JSON.parse(results.value)
       begin
         @coursera = search["coursera"]["courses"]
@@ -33,7 +33,8 @@ class ShareLearningApp < Sinatra::Base
       end          
       @keyword = search_keyword.output[:search_keyword]
     else
-       flash[:error] = result.value.message
+       flash[:error] = results.value.message
+       redirect '/'
     end
 
     slim :search
