@@ -6,16 +6,16 @@ class ShareLearningApp < Sinatra::Base
 
   get "/search" do
     search_keyword = Search.call(params)
-    results = GetSearchCourse.call(search_keyword)
+    course_details = GetSearchCourse.call(search_keyword)
     
-    if results.success? 
-      @data = results.value         
+    if course_details.success? 
+      results = course_details.value 
+      @data = CourseDetailsView.new(results)        
       @keyword = search_keyword.output[:search_keyword]
+      slim :search
     else
-       flash[:error] = results.value.message
+       flash[:error] = course_details.value.message
        redirect '/'
     end
-
-    slim :search
   end
 end
