@@ -17,10 +17,10 @@ div class="row" style="vertical-align: bottom;"
 p 
 div class="table-container"  
   p class="text-left"  Results for: '#{@keyword}'
-    (Udacity: #{@udacity_count}, Coursera: #{@coursera_count}, YouTube: #{@youtube_count})
+    (Udacity: #{@data&.udacity&.count}, Coursera: #{@data&.coursera&.count}, YouTube: #{@data&.youtube&.count})
   table class="table table-filter"
     tbody
-      - @udacity&.each do |c|
+      - @data&.udacity&.courses&.each do |c|
         tr 
           td 
           td
@@ -45,7 +45,7 @@ div class="table-container"
             onclick="location.href = '#{c["resource_url"]}';"
             }
 
-      - @coursera&.each do |c|
+      - @data&.coursera&.courses&.each do |c|
         tr 
           td
           td
@@ -70,7 +70,7 @@ div class="table-container"
             onclick="location.href = '#{c["resource_url"]}';"
             }
  
-      - @youtube&.each do |c|
+      - @data&.youtube&.courses&.each do |c|
         tr 
           td
           td
