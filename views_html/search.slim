@@ -11,22 +11,24 @@ div class="row" style="vertical-align: bottom;"
         span class="input-group-btn"
           button{
             class="btn btn-default"
+            name="btn-search"
             type='submit'
           } Go!
     div class="col-lg-2"
 p 
 div class="table-container"  
-  p class="text-left"  Results for: '#{@keyword}'
+  p class="text-left results_count"  Results for: '#{@keyword}'
     (Udacity: #{@data&.udacity_count}, Coursera: #{@data&.coursera_count}, YouTube: #{@data&.youtube_count})
-  table class="table table-filter"
+  table class="table" id="course_table"
     tbody
       - @data&.udacity_courses&.each do |course|
-        tr 
+        tr class="course_row"
           td 
           td
             div class="media"
               a href="#" class="pull-left"
-                img{src="#{course.photo_url}" 
+                img{src="#{course.photo_url}"
+                class="course_photo" 
                 width="150" 
                 height="110"
                 } 
@@ -45,12 +47,13 @@ div class="table-container"
             }
 
       - @data&.coursera_courses&.each do |course|
-        tr 
+        tr class="course_row"
           td 
           td
             div class="media"
               a href="#" class="pull-left"
                 img{src="#{course.photo_url}" 
+                class="course_photo" 
                 width="150" 
                 height="110"
                 } 
@@ -69,12 +72,13 @@ div class="table-container"
             }
  
       - @data&.youtube_courses&.each do |course|
-        tr 
+        tr class="course_row"
           td 
           td
             div class="media"
               a href="#" class="pull-left"
                 img{src="#{course.photo_url}" 
+                class="course_photo" 
                 width="150" 
                 height="110"
                 } 

@@ -3,7 +3,6 @@ require_relative 'course'
 
 class CourseDetailsView
   SHORT_STR_SIZE = 200
-  # FB_ATTACHED_URL_PREFIX = 'https://www.facebook.com/l.php?u='
   PLACEHOLDER_IMG_URL = 'http://placehold.it/100x100?text=G'
 
   attr_reader :udacity_count, :coursera_count, :youtube_count, \
@@ -29,8 +28,6 @@ class CourseDetailsView
 
   def formatted_course(course)
     short_introduction = shortened(course.introduction, SHORT_STR_SIZE)
-    # short_attachment = shortened(posting.attachment_description, SHORT_STR_SIZE)
-    # original_attached_url = original_attachment_url(posting.attachment_url)
     photo_url = course.photo_url || PLACEHOLDER_IMG_URL
 
     CourseView.new(
