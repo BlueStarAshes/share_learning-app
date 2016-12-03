@@ -93,7 +93,7 @@ GEM
       data_magic (>= 0.22)
     path_expander (1.0.0)
     public_suffix (2.0.4)
-    puma (3.6.2)
+    puma (3.6.0)
     rack (1.6.5)
     rack-flash3 (1.0.5)
       rack

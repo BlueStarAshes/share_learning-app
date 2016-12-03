@@ -11,86 +11,87 @@ div class="row" style="vertical-align: bottom;"
         span class="input-group-btn"
           button{
             class="btn btn-default"
+            name="btn-search"
             type='submit'
           } Go!
     div class="col-lg-2"
 p 
 div class="table-container"  
-  p class="text-left"  Results for: '#{@keyword}'
-    (Udacity: #{@udacity_count}, Coursera: #{@coursera_count}, YouTube: #{@youtube_count})
-  table class="table table-filter"
+  p class="text-left results_count"  Results for: '#{@keyword}'
+    (Udacity: #{@data&.udacity_count}, Coursera: #{@data&.coursera_count}, YouTube: #{@data&.youtube_count})
+  table class="table" id="course_table"
     tbody
-      - @udacity&.each do |c|
-        tr 
+      - @data&.udacity_courses&.each do |course|
+        tr class="course_row"
           td 
           td
             div class="media"
               a href="#" class="pull-left"
-                img{src="#{c["photo_url"]}" 
+                img{src="#{course.photo_url}"
+                class="course_photo" 
                 width="150" 
                 height="110"
                 } 
               div class="media-body"
                 span class="media-meta pull-right" 
-                h4 class="title" #{c["title"]}
+                h4 class="title" #{course.title}
                 p      
-                p class="summary text-left" #{c["introduction"][0..100]}
-                  #{c["introduction"][100..200].gsub(/\s\w+\s*$/,'...')}
+                p class="summary text-left" #{course.main_introduction}
           td      
             span class="source" Udacity
             p
             input{type="button" 
             class="btn btn-info" 
             value="Link" 
-            onclick="location.href = '#{c["resource_url"]}';"
+            onclick="location.href = '#{course.resource_url}';"
             }
 
-      - @coursera&.each do |c|
-        tr 
-          td
+      - @data&.coursera_courses&.each do |course|
+        tr class="course_row"
+          td 
           td
             div class="media"
               a href="#" class="pull-left"
-                img{src="#{c["photo_url"]}" 
+                img{src="#{course.photo_url}" 
+                class="course_photo" 
                 width="150" 
                 height="110"
                 } 
               div class="media-body"
                 span class="media-meta pull-right" 
-                h4 class="title" #{c["title"]}
-                p    
-                p class="summary text-left" #{c["introduction"][0..100]}
-                  #{c["introduction"][100..200].gsub(/\s\w+\s*$/,'...')}
+                h4 class="title" #{course.title}
+                p      
+                p class="summary text-left" #{course.main_introduction}
           td      
             span class="source" Coursera
             p
             input{type="button" 
             class="btn btn-info" 
             value="Link" 
-            onclick="location.href = '#{c["resource_url"]}';"
+            onclick="location.href = '#{course.resource_url}';"
             }
  
-      - @youtube&.each do |c|
-        tr 
-          td
+      - @data&.youtube_courses&.each do |course|
+        tr class="course_row"
+          td 
           td
             div class="media"
               a href="#" class="pull-left"
-                img{src="#{c["photo_url"]}" 
+                img{src="#{course.photo_url}" 
+                class="course_photo" 
                 width="150" 
                 height="110"
                 } 
               div class="media-body"
                 span class="media-meta pull-right" 
-                h4 class="title" #{c["title"]}
-                p    
-                p class="summary text-left" #{c["introduction"][0..100]}
-                  #{c["introduction"][100..200]}
-          td  
+                h4 class="title" #{course.title}
+                p      
+                p class="summary text-left" #{course.main_introduction}
+          td      
             span class="source" YouTube
             p
             input{type="button" 
             class="btn btn-info" 
             value="Link" 
-            onclick="location.href = '#{c["resource_url"]}';"
+            onclick="location.href = '#{course.resource_url}';"
             }
