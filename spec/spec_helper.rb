@@ -12,7 +12,7 @@ require './init.rb'
 
 NEW_KEYWORD = 'java'
 
-HOST = 'http://localhost:9292'
+HOST = 'http://localhost:9000'
 
 # Helper methods
 def homepage
