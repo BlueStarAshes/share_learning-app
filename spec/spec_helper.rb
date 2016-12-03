@@ -8,11 +8,11 @@ require 'watir'
 require 'headless'
 require 'page-object'
 
-# require './init.rb'
+require './init.rb'
 
 NEW_KEYWORD = 'java'
 
-HOST = 'http://localhost:9292'
+HOST = 'http://localhost:9000'
 
 # Helper methods
 def search_page(keyword)
