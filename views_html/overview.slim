@@ -1,7 +1,7 @@
 div class="row" style="vertical-align: bottom;"
   div class="col-lg-2"
   div class="col-lg-8"
-    form role="form" action="/search" method='get' id='new-group-form'
+    form role="form" action="/search" method='get' id='search-form'
       div class="input-group"
         input{
           type="text"
@@ -16,12 +16,12 @@ div class="row" style="vertical-align: bottom;"
     div class="col-lg-2"
 
 div class="row"
-  div class="col-sm-6 col-md-4"
+  div class="course_overview col-sm-6 col-md-4"
     h3 Coursera
     p #{@data&.coursera_count} courses
-  div class="col-sm-6 col-md-4"
+  div class="course_overview col-sm-6 col-md-4"
     h3 Udacity
     p #{@data&.udacity_count} courses
-  div class="col-sm-6 col-md-4"
+  div class="course_overview col-sm-6 col-md-4"
     h3 Youtube
     p #{@data&.youtube_count} courses

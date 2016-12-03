@@ -15,6 +15,10 @@ NEW_KEYWORD = 'java'
 HOST = 'http://localhost:9000'
 
 # Helper methods
+def homepage
+  HOST
+end
+
 def search_page(keyword)
   "#{HOST}/search?search_keyword=#{keyword}"
 end

@@ -123,7 +123,7 @@ GEM
     ruby_parser (3.8.3)
       sexp_processor (~> 4.1)
     rubyzip (1.2.0)
-    selenium-webdriver (3.0.2)
+    selenium-webdriver (3.0.3)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
       websocket (~> 1.0)
