@@ -6,8 +6,8 @@ class GetSearchCourse
 
   def self.call(params)
     keyword = (params[:search_keyword].split(' ')).join("+")
-    results = HTTP.get("#{ShareLearningApp.config.ShareLearning_API}/search/"+keyword)
-    
+    results = HTTP.get("#{ShareLearningApp.config.SHARE_LEARNING_API}/search/"+keyword)
+
     Right(SearchResultsRepresenter.new(SearchResults.new).from_json(results.body))
   rescue
     Left(Error.new('Please enter an keyword'))
