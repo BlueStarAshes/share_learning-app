@@ -7,10 +7,10 @@ class ShareLearningApp < Sinatra::Base
   get "/search" do
     search_keyword = Search.call(params)
     course_details = GetSearchCourse.call(search_keyword)
-    
-    if course_details.success? 
-      results = course_details.value 
-      @data = CourseDetailsView.new(results)        
+
+    if course_details.success?
+      results = course_details.value
+      @data = CourseDetailsView.new(results)
       @keyword = search_keyword.output[:search_keyword]
       slim :search
     else
