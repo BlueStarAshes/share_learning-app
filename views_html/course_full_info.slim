@@ -1,25 +1,42 @@
 div class="row"
   div class="col-md-1"
-    h2 Title
+    h2 class="pull-left" Title
 div class="row"
   div class="col-md-3"
-    p photo
+    img[
+      class="img-rounded margin-tb-10"
+      src=""
+      alt="course-photo"
+      width="205"
+      height="150"
+    ]
   div class="col-md-9"
-    p class="text-left" Prerequisite
-    p class="text-left" Helpful
-    p class="text-left" Difficulty
-    p class="text-left" Info
-    p class="text-left" Link
+    div class="margin-tb-10"
+      p class="text-left" Prerequisite
+      p class="text-left" Helpful
+      p class="text-left" Difficulty
+      p class="text-left" Info
+      p class="text-left" Link
 div class="table-container"
   div class="row"
     div class="col-md-1"
-      h3 Reviews
+      h3 class="pull-left" Reviews
+  div class="row"
+    div class="col-md-12"
+      form
+        div class="form-group"
+          textarea class="form-control" rows="5" placeholder="Post your review..."
+          input{type="submit"
+          class="btn btn-primary btn-sm pull-right margin-tb-10"
+          value="Send"
+          onclick=""
+          }
   div class="row"
     div class="col-md-8"
     div class="col-md-4"
-      form class="form-inline"
+      form class="form-inline pull-right margin-tb-10"
         div class="form-group"
-          label class="button-group-label" for="sort-btn-group" Sort by:
+          label class="margin-r-10" for="sort-btn-group" Sort by:
           div class="btn-group" id="sort-btn-group"
             input{type="button"
             class="btn btn-info btn-sm"
@@ -31,29 +48,59 @@ div class="table-container"
             value="popularity"
             onclick=""
             }
-  div class="row"
-    div class="col-md-9"
-      p Post your review...
-    div class="col-md-3"
-      input{type="submit"
-      class="btn btn-primary btn-sm"
-      value="Send"
-      onclick=""
-      }
-  table class="table"
+  table class="table table-hover"
     tbody
       tr
-        td
-          p review content
-        td
-          p reaction-btn
+        td class="col-md-1"
+          button[
+            type="button"
+            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+            onclick=""
+          ]
+            i class="em em---1"
+            span class="badge margin-l-5" 7
+          button[
+            type="button"
+            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+            onclick=""
+          ]
+            i class="em em-grinning"
+            span class="badge margin-l-5" 5
+        td class="col-md-11"
+          p class="text-left pull-left" review content
       tr
-        td
-          p review content
-        td
-          p reaction-btn
+        td class="col-md-1"
+          button[
+            type="button"
+            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+            onclick=""
+          ]
+            i class="em em---1"
+            span class="badge margin-l-5" 7
+          button[
+            type="button"
+            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+            onclick=""
+          ]
+            i class="em em-grinning"
+            span class="badge margin-l-5" 5
+        td class="col-md-11"
+          p class="text-left pull-left" review content
       tr
-        td
-          p review content
-        td
-          p reaction-btn
+        td class="col-md-1"
+          button[
+            type="button"
+            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+            onclick=""
+          ]
+            i class="em em---1"
+            span class="badge margin-l-5" 7
+          button[
+            type="button"
+            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+            onclick=""
+          ]
+            i class="em em-grinning"
+            span class="badge margin-l-5" 5
+        td class="col-md-11"
+          p class="text-left pull-left" review content
