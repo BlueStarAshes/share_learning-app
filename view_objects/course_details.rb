@@ -31,6 +31,7 @@ class CourseDetailsView
     photo_url = course.photo_url || PLACEHOLDER_IMG_URL
 
     CourseView.new(
+      id = course.id,
       title = course.title, 
       main_introduction = short_introduction,
       resource_url = course.resource_url,
