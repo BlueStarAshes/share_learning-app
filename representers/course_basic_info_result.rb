@@ -5,6 +5,7 @@ class CourseBasicInfoRepresenter < Roar::Decorator
   include Roar::JSON
 
   property :title
+  property :source
   property :introduction
   property :link
   property :photo
