@@ -8,7 +8,8 @@ class ShareLearningApp < Sinatra::Base
     result = GetCourseFullInfo.call(params)
 
     if result.success?
-      @data = CourseFullInfoView.new(result.value)
+      course_full_info = result.value
+      @data = CourseFullInfoView.new(course_full_info)
       slim :course_full_info
     else
       flash[:error] = result.value.message

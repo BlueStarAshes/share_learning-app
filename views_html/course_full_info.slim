@@ -1,22 +1,29 @@
 div class="row"
   div class="col-md-12"
-    h2 class="pull-left" == @course_title
+    h2 class="pull-left" == @data.title
 div class="row"
   div class="col-md-3"
     img[
       class="img-rounded margin-tb-10"
-      src=""
+      src=="#{@data.photo}"
       alt="course-photo"
       width="205"
       height="150"
     ]
   div class="col-md-9"
     div class="margin-tb-10"
-      p class="text-left" Prerequisite
-      p class="text-left" Helpful
-      p class="text-left" Difficulty
-      p class="text-left" Info
-      p class="text-left" Link
+      div class="text-left"
+        h4 Prerequisite
+      div class="text-left"
+        h4 Helpful
+      div class="text-left"
+        h4 Difficulty
+      div class="text-left"
+        h4 Information
+        p #{@data.info}
+      div class="text-left"
+        h4 Link
+        a href=="#{@data.link}" target="_new" Click here to visit the course
 div class="table-container"
   div class="row"
     div class="col-md-12"

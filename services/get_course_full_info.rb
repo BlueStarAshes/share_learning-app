@@ -9,31 +9,31 @@ class GetCourseFullInfo
     course_id = params[:course_id]
 
     if course_id
-      course_full_info = CourseFullInfo.new
-      Right(course_id: course_id, course_full_info: course_full_info)
+      Right(course_id: course_id, course_full_info: CourseFullInfo.new)
     else
       Left(Error.new('Course id cannot be empty'))
     end
   }
 
-  register :get_course_basic_info, lambda { |intput|
+  register :get_course_basic_info, lambda { |input|
     begin
-      course_id = intput[:course_id]
+      course_id = input[:course_id]
       result =
         HTTP.get(
-          "#{ShareLearningApp.config.SHARE_LEARNING_API}/courses/" +
-          course_id
+          "#{ShareLearningApp.config.SHARE_LEARNING_API}/courses/#{course_id}"
         )
 
       input[:course_full_info].basic_info =
         CourseBasicInfoRepresenter.new(CourseBasicInfo.new).from_json(
           result.body
         )
+
       Right(input[:course_full_info])
     rescue
       Left(
         Error.new(
-          "Unable to retrieve the basic info of Course #{course_id}"
+          "Unable to retrieve the basic info of Course #{course_id}: " \
+          "#{ShareLearningApp.config.SHARE_LEARNING_API}/courses/#{course_id}"
         )
       )
     end
