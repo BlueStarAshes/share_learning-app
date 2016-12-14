@@ -28,7 +28,7 @@ class GetCourseFullInfo
           result.body
         )
 
-      Right(input[:course_full_info])
+      Right(input)
     rescue
       Left(
         Error.new(
@@ -39,10 +39,25 @@ class GetCourseFullInfo
     end
   }
 
+  register :get_course_prerequisites, lambda { |input|
+    begin
+      course_id = input[:course_id]
+      result =
+        HTTP.get(
+          "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+          "/course/prerequisite/#{course_id}"
+        )
+      # TODO: Implement value and representer objects for course prerequisites
+      Right(input[:course_full_info])
+    rescue
+    end
+  }
+
   def self.call(params)
     Dry.Transaction(container: self) do
       step :validate_course_id
       step :get_course_basic_info
+      step :get_course_prerequisites
     end.call(params)
   end
 end
