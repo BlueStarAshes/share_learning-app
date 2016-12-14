@@ -13,13 +13,17 @@ div class="row"
     div class="margin-tb-10"
       div class="text-left"
         h4 Prerequisite
+        ul
+          - @data.prerequisites.each do |prerequisite|
+            li #{prerequisite.course_name}
       div class="text-left"
         h4 Helpful
       div class="text-left"
         h4 Difficulty
       div class="text-left"
         h4 Source
-        p #{@data.source}
+        ul
+          li #{@data.source}
       div class="text-left white-space-prewrapped"
         h4 Information
         p #{@data.info}

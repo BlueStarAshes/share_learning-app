@@ -32,8 +32,7 @@ class GetCourseFullInfo
     rescue
       Left(
         Error.new(
-          "Unable to retrieve the basic info of Course #{course_id}: " \
-          "#{ShareLearningApp.config.SHARE_LEARNING_API}/courses/#{course_id}"
+          "Unable to retrieve the basic info of Course #{course_id}"
         )
       )
     end
@@ -47,9 +46,34 @@ class GetCourseFullInfo
           "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
           "/course/prerequisite/#{course_id}"
         )
-      # TODO: Implement value and representer objects for course prerequisites
-      Right(input[:course_full_info])
+
+      prerequisites =
+        PrerequisitesResultRepresenter.new(PrerequisitesResult.new).from_json(
+          result.body
+        ).prerequisites
+
+      if prerequisites
+        input[:course_full_info].prerequisites = prerequisites
+        Right(input[:course_full_info])
+      else
+        Left(
+          Error.new(
+            # TODO: Error info here needed to be adjusted later
+            'prerequisites is null: ' \
+            "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+            "/course/prerequisite/#{course_id}"
+          )
+        )
+      end
     rescue
+      Left(
+        Error.new(
+          # TODO: Error info here needed to be adjusted later
+          "Unable to retrieve prerequisites of Course #{course_id}: " \
+          "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+          "/course/prerequisite/#{course_id}"
+        )
+      )
     end
   }
 
