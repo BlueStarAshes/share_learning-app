@@ -52,19 +52,8 @@ class GetCourseFullInfo
           result.body
         ).prerequisites
 
-      if prerequisites
-        input[:course_full_info].prerequisites = prerequisites
-        Right(input[:course_full_info])
-      else
-        Left(
-          Error.new(
-            # TODO: Error info here needed to be adjusted later
-            'prerequisites is null: ' \
-            "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
-            "/course/prerequisite/#{course_id}"
-          )
-        )
-      end
+      input[:course_full_info].prerequisites = prerequisites
+      Right(input[:course_full_info])
     rescue
       Left(
         Error.new(

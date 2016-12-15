@@ -14,8 +14,9 @@ div class="row"
       div class="text-left"
         h4 Prerequisite
         ul
-          - @data.prerequisites.each do |prerequisite|
-            li #{prerequisite.course_name}
+          - if @data.prerequisites
+            - @data.prerequisites.each do |prerequisite|
+                li #{prerequisite.course_name}
       div class="text-left"
         h4 Helpful
       div class="text-left"
