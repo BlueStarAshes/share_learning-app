@@ -47,23 +47,45 @@ class GetCourseFullInfo
           "/course/prerequisite/#{course_id}"
         )
 
-      prerequisites =
+      input[:course_full_info].prerequisites =
         PrerequisitesResultRepresenter.new(PrerequisitesResult.new).from_json(
           result.body
         ).prerequisites
 
-      input[:course_full_info].prerequisites = prerequisites
-      Right(input[:course_full_info])
+      Right(input)
     rescue
       Left(
         Error.new(
-          # TODO: Error info here needed to be adjusted later
-          "Unable to retrieve prerequisites of Course #{course_id}: " \
-          "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
-          "/course/prerequisite/#{course_id}"
+          "Unable to retrieve prerequisites of Course #{course_id}"
         )
       )
     end
+  }
+
+  register :get_course_helpful, lambda { |input|
+    begin
+      course_id = input[:course_id]
+      result =
+        HTTP.get(
+          "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+          "/course/helpful/#{course_id}"
+        )
+
+      # TODO: Implement value and representer objects for course helpful info
+      input[:course_full_info].helpful
+
+      Right(input)
+    rescue
+      Left(
+        Error.new(
+          "Unable to retrieve prerequisites of Course #{course_id}"
+        )
+      )
+    end
+  }
+
+  register :return_course_full_info, lambda { |input|
+    Right(input[:course_full_info])
   }
 
   def self.call(params)
@@ -71,6 +93,8 @@ class GetCourseFullInfo
       step :validate_course_id
       step :get_course_basic_info
       step :get_course_prerequisites
+      step :get_course_helpful
+      step :return_course_full_info
     end.call(params)
   end
 end

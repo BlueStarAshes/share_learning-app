@@ -3,5 +3,6 @@
 CourseFullInfo =
   Struct.new(
     :basic_info,
-    :prerequisites
+    :prerequisites,
+    :helpful
   )
