@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-PrerequisitesResult = Struct.new(
+CoursePrerequisitesResult = Struct.new(
   :prerequisites
 )

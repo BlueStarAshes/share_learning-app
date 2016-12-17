@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-HelpfulnessResult = Struct.new(
+CourseDifficultyResult = Struct.new(
   :avg_rating
 )

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-PrerequisiteResult = Struct.new(
+CoursePrerequisiteResult = Struct.new(
   :id,
   :course_name
 )
