@@ -10,7 +10,8 @@ class CourseFullInfoView
     :link,
     :photo,
     :prerequisites,
-    :helpfulness_rating
+    :helpfulness_rating,
+    :difficulty_rating
   )
 
   def initialize(course_full_info)
@@ -21,5 +22,6 @@ class CourseFullInfoView
     @photo = course_full_info.basic_info.photo
     @prerequisites = course_full_info.prerequisites
     @helpfulness_rating = course_full_info.helpfulness_rating
+    @difficulty_rating = course_full_info.difficulty_rating
   end
 end

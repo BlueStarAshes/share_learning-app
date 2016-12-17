@@ -62,7 +62,7 @@ class GetCourseFullInfo
     end
   }
 
-  register :get_course_helpful, lambda { |input|
+  register :get_course_helpfulness_rating, lambda { |input|
     begin
       course_id = input[:course_id]
       result =
@@ -71,7 +71,6 @@ class GetCourseFullInfo
           "/course/helpful/#{course_id}"
         )
 
-      # TODO: Implement value and representer objects for course helpful info
       input[:course_full_info].helpfulness_rating =
         HelpfulnessResultRepresenter.new(HelpfulnessResult.new).from_json(
           result.body
@@ -81,7 +80,31 @@ class GetCourseFullInfo
     rescue
       Left(
         Error.new(
-          "Unable to retrieve prerequisites of Course #{course_id}"
+          "Unable to retrieve helpfulness rating of Course #{course_id}"
+        )
+      )
+    end
+  }
+
+  register :get_course_difficulty_rating, lambda { |input|
+    begin
+      course_id = input[:course_id]
+      result =
+        HTTP.get(
+          "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+          "/course/difficulty/#{course_id}"
+        )
+
+      input[:course_full_info].difficulty_rating =
+        DifficultyResultRepresenter.new(DifficultyResult.new).from_json(
+          result.body
+        ).avg_rating
+
+      Right(input)
+    rescue
+      Left(
+        Error.new(
+          "Unable to retrieve difficulty rating of Course #{course_id}"
         )
       )
     end
@@ -96,7 +119,8 @@ class GetCourseFullInfo
       step :validate_course_id
       step :get_course_basic_info
       step :get_course_prerequisites
-      step :get_course_helpful
+      step :get_course_helpfulness_rating
+      step :get_course_difficulty_rating
       step :return_course_full_info
     end.call(params)
   end

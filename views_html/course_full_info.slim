@@ -24,6 +24,9 @@ div class="row"
             li #{@data.helpfulness_rating} / 5
       div class="text-left"
         h4 Difficulty
+        ul
+          - if @data.difficulty_rating
+            li #{@data.difficulty_rating} / 5
       div class="text-left"
         h4 Source
         ul
