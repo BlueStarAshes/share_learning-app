@@ -1,9 +1,10 @@
 div class="row"
   div class="col-md-12"
-    h2 class="pull-left" == @data.title
+    h2 id="course_title" class="pull-left" == @data.title
 div class="row"
   div class="col-md-3"
     img[
+      id="course_photo"
       class="img-rounded margin-tb-10"
       src=="#{@data.photo}"
       alt="course-photo"
@@ -12,30 +13,30 @@ div class="row"
   div class="col-md-9"
     div class="margin-tb-10"
       div class="text-left"
-        h4 Prerequisite
+        h4 id="course_prerequisite_header" Prerequisite
         ul
           - if @data.prerequisites
             - @data.prerequisites.each do |prerequisite|
                 li #{prerequisite.course_name}
       div class="text-left"
-        h4 Helpfulness
+        h4 id="course_helpfulness_header" Helpfulness
         ul
           - if @data.helpfulness_rating
             li #{@data.helpfulness_rating} / 5
       div class="text-left"
-        h4 Difficulty
+        h4 id="course_difficulty_header" Difficulty
         ul
           - if @data.difficulty_rating
             li #{@data.difficulty_rating} / 5
       div class="text-left"
-        h4 Source
+        h4 id="course_source_header" Source
         ul
           li #{@data.source}
       div class="text-left white-space-prewrapped"
-        h4 Information
+        h4 id="course_information_header" Information
         p #{@data.info}
       div class="text-left"
-        h4 Link
+        h4 id="course_link_header" Link
         a href=="#{@data.link}" target="_new" Click here to visit the course
 div class="table-container"
   div class="row"
@@ -47,6 +48,7 @@ div class="table-container"
         div class="form-group"
           textarea class="form-control" rows="5" placeholder="Post your review..."
           input{type="submit"
+          name="new_review"
           class="btn btn-primary btn-sm pull-right margin-tb-10"
           value="Send"
           onclick=""
