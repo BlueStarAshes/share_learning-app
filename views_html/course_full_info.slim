@@ -18,7 +18,10 @@ div class="row"
             - @data.prerequisites.each do |prerequisite|
                 li #{prerequisite.course_name}
       div class="text-left"
-        h4 Helpful
+        h4 Helpfulness
+        ul
+          - if @data.helpfulness_rating
+            li #{@data.helpfulness_rating} / 5
       div class="text-left"
         h4 Difficulty
       div class="text-left"

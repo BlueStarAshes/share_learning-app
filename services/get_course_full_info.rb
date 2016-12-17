@@ -72,7 +72,10 @@ class GetCourseFullInfo
         )
 
       # TODO: Implement value and representer objects for course helpful info
-      input[:course_full_info].helpful
+      input[:course_full_info].helpfulness_rating =
+        HelpfulnessResultRepresenter.new(HelpfulnessResult.new).from_json(
+          result.body
+        ).avg_rating
 
       Right(input)
     rescue
