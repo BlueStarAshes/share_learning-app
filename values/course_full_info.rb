@@ -5,5 +5,6 @@ CourseFullInfo =
     :basic_info,
     :prerequisites,
     :helpfulness_rating,
-    :difficulty_rating
+    :difficulty_rating,
+    :reviews
   )

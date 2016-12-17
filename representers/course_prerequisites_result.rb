@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require_relative 'course_prerequisite_result'
 
-# Represents course in search results for JSON API output
+# Represents prerequisites in prerequisite-get result for JSON API output
 class CoursePrerequisitesResultRepresenter < Roar::Decorator
   include Roar::JSON
 

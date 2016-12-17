@@ -48,7 +48,9 @@ class GetCourseFullInfo
         )
 
       input[:course_full_info].prerequisites =
-        PrerequisitesResultRepresenter.new(PrerequisitesResult.new).from_json(
+        CoursePrerequisitesResultRepresenter.new(
+          CoursePrerequisitesResult.new
+        ).from_json(
           result.body
         ).prerequisites
 
@@ -72,7 +74,9 @@ class GetCourseFullInfo
         )
 
       input[:course_full_info].helpfulness_rating =
-        HelpfulnessResultRepresenter.new(HelpfulnessResult.new).from_json(
+        CourseHelpfulnessResultRepresenter.new(
+          CourseHelpfulnessResult.new
+        ).from_json(
           result.body
         ).avg_rating
 
@@ -96,7 +100,9 @@ class GetCourseFullInfo
         )
 
       input[:course_full_info].difficulty_rating =
-        DifficultyResultRepresenter.new(DifficultyResult.new).from_json(
+        CourseDifficultyResultRepresenter.new(
+          CourseDifficultyResult.new
+        ).from_json(
           result.body
         ).avg_rating
 
@@ -105,6 +111,29 @@ class GetCourseFullInfo
       Left(
         Error.new(
           "Unable to retrieve difficulty rating of Course #{course_id}"
+        )
+      )
+    end
+  }
+
+  register :get_course_reviews, lambda { |input|
+    begin
+      course_id = input[:course_id]
+      result =
+        HTTP.get(
+          "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+          "/course/#{course_id}/reviews"
+        )
+
+      # TODO: implement value and representer objects for course reviews
+      input[:course_full_info].reviews =
+        JSON.parse(result.body)
+
+      Right(input)
+    rescue
+      Left(
+        Error.new(
+          "Unable to retrieve reviews of Course #{course_id}"
         )
       )
     end
@@ -121,6 +150,7 @@ class GetCourseFullInfo
       step :get_course_prerequisites
       step :get_course_helpfulness_rating
       step :get_course_difficulty_rating
+      step :get_course_reviews
       step :return_course_full_info
     end.call(params)
   end

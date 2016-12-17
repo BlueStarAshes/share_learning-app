@@ -68,59 +68,25 @@ div class="table-container"
             value="popularity"
             onclick=""
             }
-  table class="table table-hover"
-    tbody
-      tr
-        td class="col-md-1"
-          button[
-            type="button"
-            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
-            onclick=""
-          ]
-            i class="em em---1"
-            span class="badge margin-l-5" 7
-          button[
-            type="button"
-            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
-            onclick=""
-          ]
-            i class="em em-grinning"
-            span class="badge margin-l-5" 5
-        td class="col-md-11"
-          p class="text-left pull-left" review content
-      tr
-        td class="col-md-1"
-          button[
-            type="button"
-            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
-            onclick=""
-          ]
-            i class="em em---1"
-            span class="badge margin-l-5" 7
-          button[
-            type="button"
-            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
-            onclick=""
-          ]
-            i class="em em-grinning"
-            span class="badge margin-l-5" 5
-        td class="col-md-11"
-          p class="text-left pull-left" review content
-      tr
-        td class="col-md-1"
-          button[
-            type="button"
-            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
-            onclick=""
-          ]
-            i class="em em---1"
-            span class="badge margin-l-5" 7
-          button[
-            type="button"
-            class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
-            onclick=""
-          ]
-            i class="em em-grinning"
-            span class="badge margin-l-5" 5
-        td class="col-md-11"
-          p class="text-left pull-left" review content
+  - if @data.reviews
+    table class="table table-hover"
+      tbody
+        - @data.reviews.each do |review|
+          tr
+            td class="col-md-1"
+              button[
+                type="button"
+                class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+                onclick=""
+              ]
+                i class="em em---1"
+                span class="badge margin-l-5" 7
+              button[
+                type="button"
+                class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+                onclick=""
+              ]
+                i class="em em-grinning"
+                span class="badge margin-l-5" 5
+            td class="col-md-11"
+              p class="text-left pull-left" #{review['content']}
