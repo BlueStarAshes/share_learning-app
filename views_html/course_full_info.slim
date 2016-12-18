@@ -41,7 +41,7 @@ div class="row"
 div class="table-container"
   div class="row"
     div class="col-md-12"
-      h3 class="pull-left" Reviews
+      h3 class="pull-left" Review
   div class="row"
     div class="col-md-12"
       form
@@ -53,24 +53,24 @@ div class="table-container"
           value="Send"
           onclick=""
           }
-  div class="row"
-    div class="col-md-8"
-    div class="col-md-4"
-      form class="form-inline pull-right margin-tb-10"
-        div class="form-group"
-          label class="margin-r-10" for="sort-btn-group" Sort by:
-          div class="btn-group" id="sort-btn-group"
-            input{type="button"
-            class="btn btn-info btn-sm"
-            value="time"
-            onclick=""
-            }
-            input{type="button"
-            class="btn btn-info btn-sm"
-            value="popularity"
-            onclick=""
-            }
   - if @data.reviews
+    div class="row"
+      div class="col-md-8"
+      div class="col-md-4"
+        form class="form-inline pull-right margin-tb-10"
+          div class="form-group"
+            label class="margin-r-10" for="sort-btn-group" Sort by:
+            div class="btn-group" id="sort-btn-group"
+              input{type="button"
+              class="btn btn-info btn-sm"
+              value="time"
+              onclick=""
+              }
+              input{type="button"
+              class="btn btn-info btn-sm"
+              value="popularity"
+              onclick=""
+              }
     table class="table table-hover"
       tbody
         - @data.reviews.each do |review|
@@ -91,4 +91,4 @@ div class="table-container"
                 i class="em em-grinning"
                 span class="badge margin-l-5" 5
             td class="col-md-11"
-              p class="text-left pull-left" #{review['content']}
+              p class="text-left pull-left" #{review.content}

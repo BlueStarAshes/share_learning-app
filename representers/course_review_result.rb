@@ -5,5 +5,6 @@ class CourseReviewResultRepresenter < Roar::Decorator
   include Roar::JSON
 
   property :id
-  property :course_name
+  property :content
+  property :created_time
 end

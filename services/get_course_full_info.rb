@@ -127,7 +127,11 @@ class GetCourseFullInfo
 
       # TODO: implement value and representer objects for course reviews
       input[:course_full_info].reviews =
-        JSON.parse(result.body)
+        CourseReviewsResultRepresenter.new(
+          CourseReviewsResult.new
+        ).from_json(
+          result.body
+        ).reviews
 
       Right(input)
     rescue
