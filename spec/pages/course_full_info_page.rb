@@ -19,6 +19,10 @@ class CourseFullInfoPage
   h4(:course_information_header, id: 'course_information_header')
   h4(:course_link_header, id: 'course_link_header')
 
+  li(:course_source, id: 'course_source')
+  p(:course_information, id: 'course_information')
+  a(:course_link, id: 'course_link')
+
   img(:course_photo, id: 'course_photo')
   button(:new_review, name: 'new_review')
 end

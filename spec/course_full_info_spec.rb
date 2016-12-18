@@ -44,6 +44,10 @@ describe 'Course_full_info Page' do
         page.course_source_header.must_include 'Source'
         page.course_information_header.must_include 'Information'
         page.course_link_header.must_include 'Link'
+
+        page.course_source.length.must_be :>, 0
+        page.course_information.length.must_be :>, 0
+        page.course_link_element.attribute(:href).length.must_be :>, 0
       end
     end
   end
