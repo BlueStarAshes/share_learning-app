@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require_relative 'spec_helper'
 
-describe 'Search Page' do
+describe 'Homepage' do
   before do
     unless @browser
       # @headless = Headless.new
@@ -14,56 +14,75 @@ describe 'Search Page' do
     # @headless.destroy
   end
 
-  it '(HAPPY) should see website features' do
-    # GIVEN    
-    @browser.goto search_page('machine+learning')
-    @browser.title.must_include 'ShareLearning'
-    @browser.h1.text.must_include 'ShareLearning'
+  describe 'Page elements' do
+    include PageObject::PageFactory
 
-    # THEN
-    @browser.button(name: 'btn-search').visible?.must_equal true
-    @browser.input(name: 'search_keyword').visible?.must_equal true
-    @browser.p(class: "results_count").visible?.must_equal true
-    @browser.table(id: "course_table").visible?.must_equal true
+    it '(HAPPY) should see website features' do
+      # GIVEN: user goes to the search page
+      visit SearchPage do |page|
+        # THEN
+        page.title.must_include 'ShareLearning'
+        page.heading.must_include 'ShareLearning' 
+        page.search_btn_element.visible?.must_equal true
+        page.keyword_input_element.visible?.must_equal true
+        page.counts_element.visible?.must_equal true
+        page.courses_table_element.visible?.must_equal true
+      end
+    end
+
+    it '(HAPPY) should see content' do
+      # GIVEN: user goes to the search page
+      visit SearchPage do |page|
+        # THEN: user should see a row with course information
+        page.courses_count.must_be :>=, 1
+        page.first_row.img_element.visible?.must_equal true
+        page.first_row.title_element.visible?.must_equal true
+        page.first_row.intro_element.visible?.must_equal true
+        page.first_row.link_element.visible?.must_equal true
+      end
+    end
   end
 
-  it '(HAPPY) should see content' do
-    # GIVEN    
-    @browser.goto search_page('machine+learning')
+  describe 'Search courses with keyword' do
+    include PageObject::PageFactory
 
-    # THEN
-    @browser.trs(class: 'course_row').count.must_be :>=, 1
-    first_row = @browser.trs(class: 'course_row').first
-    first_row.img(class: 'course_photo').visible?.must_equal true
-    first_row.p(class: 'summary').visible?.must_equal true
-    first_row.input(class: 'btn-info').visible?.must_equal true
-  end  
+    it '(HAPPY) should search course with new keyword successfully' do
+      # GIVEN: user goes to the search page
+      visit SearchPage do |page|
+        # WHEN: input an bad keyword
+        page.input_keyword(NEW_KEYWORD)
 
-  it '(HAPPY) should input a new keyword to search courses' do
-    # GIVEN: on the homepage
-    @browser.goto search_page('machine+learning')
+        # THEN: user should see a row with course information
+        page.courses_count.must_be :>=, 1
+        page.first_row.img_element.visible?.must_equal true
+        page.first_row.title_element.visible?.must_equal true
+        page.first_row.intro_element.visible?.must_equal true
+        page.first_row.link_element.visible?.must_equal true
+      end
+    end
 
-    # WHEN: add a valid group url
-    @browser.text_field(name: 'search_keyword').set(NEW_KEYWORD)
-    @browser.button(name: "btn-search").click
+    it '(SAD) should alert if user did not input any keyword for search' do
+      # GIVEN: user goes to the search page
+      visit SearchPage do |page|
+        # WHEN: click the go button
+        page.search_btn
 
-    # THEN: group should be present on homepage
-    @browser.trs(class: 'course_row').count.must_be :>=, 1
-    first_row = @browser.trs(class: 'course_row').first
-    first_row.img(class: 'course_photo').visible?.must_equal true
-    first_row.p(class: 'summary').visible?.must_equal true
-    first_row.input(class: 'btn-info').visible?.must_equal true
-  end  
+        # THEN: danger flash notice should be seen
+        page.flash_notice.must_include 'enter'
+        page.flash_notice_element.attribute(:class).must_include 'danger'
+      end
+    end
 
-  it '(SAD) should alert if user did not input any keyword for search' do
-    # GIVEN: on the homepage
-    @browser.goto search_page('machine+learning')
+    it '(SAD) should alert if not found any course' do
+      # GIVEN: user goes to the search page
+      visit SearchPage do |page|
+        # WHEN: input an bad keyword
+        page.input_keyword(BAD_KEYWORD)
 
-    # WHEN: add an existing group url
-    @browser.button(name: "btn-search").click
-
-    # THEN: danger flash notice should be seen
-    flash_notice = @browser.div(class: 'alert')
-    flash_notice.attribute_value('class').must_include 'danger'
-  end  
+        # THEN: danger flash notice should be seen
+        page.flash_notice.must_include 'not found'
+        page.flash_notice_element.attribute(:class).must_include 'danger'
+      end
+    end
+  end
 end
