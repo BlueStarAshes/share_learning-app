@@ -1,57 +1,84 @@
 # frozen_string_literal: true
 
 # Gets list of all groups from API
-class Synchronous
+class Asynchronous
   COURSE_ID = 1
 
   def self.call
-    begin
+    result_basic_info = Concurrent::Promise
+    .execute do
       HTTP.get(
         "#{ShareLearningApp.config.SHARE_LEARNING_API}/courses/#{COURSE_ID}"
       )
+    end
+    .then do
       puts 'get_course_basic_info'
-    rescue
+    end
+    .rescue do
       puts 'Disaster in get_course_basic_info~'
     end
 
-    begin
+    result_course_prerequisites = Concurrent::Promise
+    .execute do
       HTTP.get(
         "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
         "/course/prerequisite/#{COURSE_ID}"
       )
+    end
+    .then do
       puts 'get_course_prerequisites'
-    rescue
+    end
+    .rescue do
       puts 'Disaster in get_course_prerequisites~'
     end
 
-    begin
+    result_course_helpfulness_rating = Concurrent::Promise
+    .execute do
       HTTP.get(
         "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
         "/course/helpful/#{COURSE_ID}"
       )
+    end
+    .then do
       puts 'get_course_helpfulness_rating'
-    rescue
+    end
+    .rescue do
       puts 'Disaster in get_course_helpfulness_rating~'
     end
 
-    begin
+    result_course_difficulty_rating = Concurrent::Promise
+    .execute do
       HTTP.get(
         "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
         "/course/difficulty/#{COURSE_ID}"
       )
+    end
+    .then do
       puts 'get_course_difficulty_rating'
-    rescue
+    end
+    .rescue do
       puts 'Disaster in get_course_difficulty_rating~'
     end
 
-    begin
+    result_course_reviews = Concurrent::Promise
+    .execute do
       HTTP.get(
         "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
         "/course/#{COURSE_ID}/reviews"
       )
+    end
+    .then do
       puts 'get_course_reviews'
-    rescue
+    end
+    .rescue do
       puts 'Disaster in get_course_reviews~'
+    end
+
+    while result_basic_info.pending? &&
+          result_course_prerequisites.pending? &&
+          result_course_helpfulness_rating.pending? &&
+          result_course_difficulty_rating.pending? &&
+          result_course_reviews.pending?
     end
   end
 end
