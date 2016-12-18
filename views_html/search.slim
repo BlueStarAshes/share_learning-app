@@ -19,85 +19,88 @@ p
 div class="table-container"  
   p class="text-left results_count"  Results for: '#{@keyword}'
     (Udacity: #{@data&.udacity_count}, Coursera: #{@data&.coursera_count}, YouTube: #{@data&.youtube_count})
-  table class="table" id="course_table"
-    tbody
+  table class="table table-filter" id="course_table"
+    tbody 
       - @data&.udacity_courses&.each&.with_index do |course, index|
-        tr class="course_row"
-          td 
-          td
-            div class="media"
-              a href="#" class="pull-left"
-                img{src="#{course.photo_url}"
-                class="course_photo"
-                id="course[#{index}].img"
-                width="150" 
-                height="110"
-                } 
-              div class="media-body"
-                span class="media-meta pull-right" 
-                h4 class="title" id="course[#{index}].title" #{course.title}
-                p      
-                p class="summary text-left" id="course[#{index}].intro" #{course.main_introduction}
-          td      
-            span class="source" Udacity
-            p
-            input{type="button" 
-            class="btn btn-info" 
-            id="course[#{index}].link"
-            value="Link" 
-            onclick="location.href = '#{course.resource_url}';"
-            }
+        tr class="course_row clickable" 
+          a href="/course_full_info?course_id=#{course.id}"       
+            td 
+              td 
+                div class="media"
+                  a href="/course_full_info?course_id=#{course.id}" class="pull-left"
+                    img{src="#{course.photo_url}"
+                    class="course_photo"
+                    id="course[#{index}].img"
+                    width="150" 
+                    height="110"
+                    } 
+                  div class="media-body"
+                    span class="media-meta pull-right" 
+                    h4 class="title" id="course[#{index}].title" #{course.title}
+                    p      
+                    p class="summary text-left" id="course[#{index}].intro" #{course.main_introduction}
+              td      
+                span class="source" Udacity
+                p
+                input{type="button" 
+                class="btn btn-info" 
+                id="course[#{index}].link"
+                value="Link" 
+                onclick="location.href = '#{course.resource_url}';"
+                }
 
       - @data&.coursera_courses&.each&.with_index do |course, index|
-        tr class="course_row"
-          td 
-          td
-            div class="media"
-              a href="#" class="pull-left"
-                img{src="#{course.photo_url}" 
-                class="course_photo"
-                id="course[#{index}].img"
-                width="150" 
-                height="110"
-                } 
-              div class="media-body"
-                span class="media-meta pull-right" 
-                h4 class="title" id="course[#{index}].title" #{course.title}
-                p      
-                p class="summary text-left" id="course[#{index}].intro" #{course.main_introduction}
-          td      
-            span class="source" Coursera
-            p
-            input{type="button" 
-            class="btn btn-info"
-            id="course[#{index}].link"
-            value="Link" 
-            onclick="location.href = '#{course.resource_url}';"
-            }
+        tr class="course_row clickable"
+          a href="/course_full_info?course_id=#{course.id}"       
+            td 
+              td 
+                div class="media"
+                  a href="/course_full_info?course_id=#{course.id}" class="pull-left"
+                    img{src="#{course.photo_url}"
+                    class="course_photo"
+                    id="course[#{index}].img"
+                    width="150" 
+                    height="110"
+                    } 
+                  div class="media-body"
+                    span class="media-meta pull-right" 
+                    h4 class="title" id="course[#{index}].title" #{course.title}
+                    p      
+                    p class="summary text-left" id="course[#{index}].intro" #{course.main_introduction}
+              td      
+                span class="source" Coursera
+                p
+                input{type="button" 
+                class="btn btn-info" 
+                id="course[#{index}].link"
+                value="Link" 
+                onclick="location.href = '#{course.resource_url}';"
+                }
  
       - @data&.youtube_courses&.each&.with_index do |course, index|
         tr class="course_row"
-          td 
-          td
-            div class="media"
-              a href="#" class="pull-left"
-                img{src="#{course.photo_url}" 
-                class="course_photo"
-                id="course[#{index}].img"
-                width="150" 
-                height="110"
-                } 
-              div class="media-body"
-                span class="media-meta pull-right" 
-                h4 class="title" id="course[#{index}].title" #{course.title}
-                p      
-                p class="summary text-left" id="course[#{index}].intro" #{course.main_introduction}
-          td      
-            span class="source" YouTube
-            p
-            input{type="button" 
-            class="btn btn-info"
-            id="course[#{index}].link"
-            value="Link" 
-            onclick="location.href = '#{course.resource_url}';"
-            }
+          a href="/course_full_info?course_id=#{course.id}"  
+            td 
+            td
+              div class="media"
+                a href="/course_full_info?course_id=#{course.id}" class="pull-left"
+                  img{src="#{course.photo_url}" 
+                  class="course_photo"
+                  id="course[#{index}].img"
+                  width="150" 
+                  height="110"
+                  } 
+                div class="media-body"
+                  span class="media-meta pull-right" 
+                  h4 class="title" id="course[#{index}].title" #{course.title}
+                  p      
+                  p class="summary text-left" id="course[#{index}].intro" #{course.main_introduction}
+            td      
+              span class="source" YouTube
+              p
+              input{type="button" 
+              class="btn btn-info"
+              id="course[#{index}].link"
+              value="Link" 
+              onclick="location.href = '#{course.resource_url}';"
+              }
