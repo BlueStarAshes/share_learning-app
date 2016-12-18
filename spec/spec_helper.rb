@@ -12,14 +12,11 @@ require './init.rb'
 require_relative 'pages/init.rb'
 
 NEW_KEYWORD = 'java'
+BAD_KEYWORD = 'ThisIsBadKeyword'
 
 HOST = 'http://localhost:9000'
 
 # Helper methods
 def homepage
   HOST
-end
-
-def search_page(keyword)
-  "#{HOST}/search?search_keyword=#{keyword}"
 end
