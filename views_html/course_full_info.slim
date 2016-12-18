@@ -1,0 +1,94 @@
+div class="row"
+  div class="col-md-12"
+    h2 id="course_title" class="pull-left" == @data.title
+div class="row"
+  div class="col-md-3"
+    img[
+      id="course_photo"
+      class="img-rounded margin-tb-10"
+      src=="#{@data.photo}"
+      alt="course-photo"
+      width="205"
+    ]
+  div class="col-md-9"
+    div class="margin-tb-10"
+      div class="text-left"
+        h4 id="course_prerequisite_header" Prerequisite
+        ul
+          - if @data.prerequisites
+            - @data.prerequisites.each do |prerequisite|
+                li #{prerequisite.course_name}
+      div class="text-left"
+        h4 id="course_helpfulness_header" Helpfulness
+        ul
+          - if @data.helpfulness_rating
+            li #{@data.helpfulness_rating} / 5
+      div class="text-left"
+        h4 id="course_difficulty_header" Difficulty
+        ul
+          - if @data.difficulty_rating
+            li #{@data.difficulty_rating} / 5
+      div class="text-left"
+        h4 id="course_source_header" Source
+        ul
+          li id="course_source" #{@data.source}
+      div class="text-left white-space-prewrapped"
+        h4 id="course_information_header" Information
+        p id="course_information" #{@data.info}
+      div class="text-left"
+        h4 id="course_link_header" Link
+        a href=="#{@data.link}" target="_new" id="course_link" Click here to visit the course
+div class="table-container"
+  div class="row"
+    div class="col-md-12"
+      h3 class="pull-left" Review
+  div class="row"
+    div class="col-md-12"
+      form
+        div class="form-group"
+          textarea class="form-control" rows="5" placeholder="Post your review..."
+          input{type="submit"
+          name="new_review"
+          class="btn btn-primary btn-sm pull-right margin-tb-10"
+          value="Send"
+          onclick=""
+          }
+  - if @data.reviews
+    div class="row"
+      div class="col-md-8"
+      div class="col-md-4"
+        form class="form-inline pull-right margin-tb-10"
+          div class="form-group"
+            label class="margin-r-10" for="sort-btn-group" Sort by:
+            div class="btn-group" id="sort-btn-group"
+              input{type="button"
+              class="btn btn-info btn-sm"
+              value="time"
+              onclick=""
+              }
+              input{type="button"
+              class="btn btn-info btn-sm"
+              value="popularity"
+              onclick=""
+              }
+    table class="table table-hover"
+      tbody
+        - @data.reviews.each do |review|
+          tr
+            td class="col-md-1"
+              button[
+                type="button"
+                class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+                onclick=""
+              ]
+                i class="em em---1"
+                span class="badge margin-l-5" 7
+              button[
+                type="button"
+                class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+                onclick=""
+              ]
+                i class="em em-grinning"
+                span class="badge margin-l-5" 5
+            td class="col-md-11"
+              p class="text-left pull-left" #{review.content}
