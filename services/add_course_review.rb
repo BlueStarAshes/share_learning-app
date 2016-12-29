@@ -5,21 +5,20 @@ class AddCourseReview
   extend Dry::Monads::Either::Mixin
   extend Dry::Container::Mixin
 
-  register :validate_course_id, lambda { |new_course_review|
-    if new_course_review[:course_id]
-      puts "Course ID: #{params[:course_id]}"
-      Right(params)
+  register :validate_course_id, lambda { |input|
+    if input[:course_id]
+      Right(input)
     else
       Left(
-        Error.new("Course ID cannot be empty!;#{new_course_review[:content]}")
+        Error.new("Course ID cannot be empty!;#{input[:content]}")
       )
     end
   }
 
-  register :call_api_to_post_review, lambda { |new_course_review|
+  register :call_api_to_post_review, lambda { |input|
     begin
-      course_id = new_course_review[:course_id]
-      content = new_course_review[:content]
+      course_id = input[:course_id]
+      content = input[:content]
       Right(
         HTTP.post(
           "#{ShareLearningApp.config.SHARE_LEARNING_API}/reviews/#{course_id}",
@@ -31,10 +30,10 @@ class AddCourseReview
     end
   }
 
-  def self.call(new_course_review)
+  def self.call(input)
     Dry.Transaction(container: self) do
       step :validate_course_id
       step :call_api_to_post_review
-    end.call(new_course_review)
+    end.call(input)
   end
 end

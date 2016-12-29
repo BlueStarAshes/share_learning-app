@@ -19,8 +19,11 @@ class ShareLearningApp < Sinatra::Base
   end
 
   post '/course_full_info/new_review' do
-    new_course_review = NewCourseReview(params)
-    result = AddCourseReview.call(new_course_review)
+    new_course_review = NewCourseReview.call(params)
+    result = AddCourseReview.call(
+      course_id: @course_id,
+      content: new_course_review[:review_content]
+    )
 
     if result.success?
       flash[:notice] = 'Review successfully added'

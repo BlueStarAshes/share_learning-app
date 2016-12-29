@@ -44,7 +44,7 @@ div class="table-container"
       h3 class="pull-left" Review
   div class="row"
     div class="col-md-12"
-      form role="form" action="/course_full_info/new_review" method='post' id='new_review_form'
+      form role="form" action="/course_full_info/#{@course_id}/new_review" method='post' id='new_review_form'
         div class="form-group"
           textarea name="review_content" class="form-control" rows="5" placeholder="Post your review..."
           input{type="submit"
