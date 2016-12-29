@@ -44,14 +44,12 @@ div class="table-container"
       h3 class="pull-left" Review
   div class="row"
     div class="col-md-12"
-      form
+      form role="form" action="/course_full_info/new_review" method='post' id='new_review_form'
         div class="form-group"
-          textarea class="form-control" rows="5" placeholder="Post your review..."
+          textarea name="review_content" class="form-control" rows="5" placeholder="Post your review..."
           input{type="submit"
-          name="new_review"
           class="btn btn-primary btn-sm pull-right margin-tb-10"
-          value="Send"
-          onclick=""
+          value="Add"
           }
   - if @data.reviews
     div class="row"
