@@ -22,7 +22,7 @@ class AddCourseReview
       Right(
         HTTP.post(
           "#{ShareLearningApp.config.SHARE_LEARNING_API}/reviews/#{course_id}",
-          json: { course_id: course_id, request: content }
+          json: { content: content }
         )
       )
     rescue

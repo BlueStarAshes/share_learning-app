@@ -4,6 +4,7 @@ require_relative 'course'
 # View object for course full info page
 class CourseFullInfoView
   attr_reader(
+    :course_id,
     :title,
     :source,
     :info,
@@ -16,6 +17,7 @@ class CourseFullInfoView
   )
 
   def initialize(course_full_info)
+    @course_id = course_full_info.course_id
     @title = course_full_info.basic_info.title
     @source = course_full_info.basic_info.source
     @info = course_full_info.basic_info.introduction

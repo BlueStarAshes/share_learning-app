@@ -9,7 +9,6 @@ class ShareLearningApp < Sinatra::Base
 
     if result.success?
       course_full_info = result.value
-      @course_id = params[:course_id]
       @data = CourseFullInfoView.new(course_full_info)
       slim :course_full_info
     else
@@ -21,7 +20,7 @@ class ShareLearningApp < Sinatra::Base
   post '/course_full_info/new_review' do
     new_course_review = NewCourseReview.call(params)
     result = AddCourseReview.call(
-      course_id: @course_id,
+      course_id: new_course_review[:course_id],
       content: new_course_review[:review_content]
     )
 
@@ -31,7 +30,6 @@ class ShareLearningApp < Sinatra::Base
       flash[:error] = result.value.message
     end
 
-    # redirect "/course_full_info?course_id=#{@course_id}"
-    redirect '/'
+    redirect "/course_full_info?course_id=#{new_course_review[:course_id]}"
   end
 end

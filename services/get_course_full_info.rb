@@ -9,7 +9,9 @@ class GetCourseFullInfo
     course_id = params[:course_id]
 
     if course_id
-      Right(course_id: course_id, course_full_info: CourseFullInfo.new)
+      course_full_info = CourseFullInfo.new
+      course_full_info.course_id = course_id
+      Right(course_id: course_id, course_full_info: course_full_info)
     else
       Left(Error.new('Course id cannot be empty'))
     end

@@ -44,9 +44,13 @@ div class="table-container"
       h3 class="pull-left" Review
   div class="row"
     div class="col-md-12"
-      form role="form" action="/course_full_info/#{@course_id}/new_review" method='post' id='new_review_form'
+      form role="form" action="/course_full_info/new_review" method='post' id='new_review_form'
         div class="form-group"
           textarea name="review_content" class="form-control" rows="5" placeholder="Post your review..."
+          input{type="hidden"
+          name="course_id"
+          value="#{@data.course_id}"
+          }
           input{type="submit"
           class="btn btn-primary btn-sm pull-right margin-tb-10"
           value="Add"
@@ -89,4 +93,4 @@ div class="table-container"
                 i class="em em-grinning"
                 span class="badge margin-l-5" 5
             td class="col-md-11"
-              p class="text-left pull-left" #{review.content}
+              p class="text-left pull-left white-space-prewrapped" #{review.content}
