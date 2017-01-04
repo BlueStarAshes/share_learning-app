@@ -2,7 +2,12 @@ doctype html
 html
   head
     title ShareLearning
-
+    / JQuery 
+    script{
+      src="https://code.jquery.com/jquery-1.12.4.min.js"
+      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+      crossorigin="anonymous"
+    }
     / Bootstrap CSS and theme (United Theme)
     link{
       href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/united/bootstrap.min.css"
@@ -62,16 +67,20 @@ html
       .white-space-prewrapped {
         white-space: pre-wrap;
       }
+    javascript:
+      $(document).ready(function($) {
+          $(".course_row").click(function() {
+              window.document.location = $(this).data("href");
+          });
+      });
+
   body
-    / JQuery and Bootstrap JS
-    script{
-      src="https://code.jquery.com/jquery-1.12.4.min.js"
-      integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-      crossorigin="anonymous"
-    }
+    /Bootstrap JS
+
     script{
       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
     }
+
     / == slim :nav
     .container id='html_body' style="text-align: center;"
       h1 ShareLearning
