@@ -84,7 +84,7 @@ div class="table-container"
                   class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
                   onclick=""
                 ]
-                  i class="#{reaction.emoji}"
-                  span class="badge margin-l-5" 7
+                  i class="#{ reaction.emoji }"
+                  span class="badge margin-l-5" #{ @data.all_review_reactions[review.id.to_s.to_sym][reaction.type.to_sym].to_i }
             td class="col-md-11"
               p class="text-left pull-left white-space-prewrapped" #{review.content}

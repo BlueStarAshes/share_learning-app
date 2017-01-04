@@ -169,17 +169,34 @@ class GetCourseFullInfo
     end
   }
 
-  register :get_review_reactions, lambda { |input|
+  register :get_all_review_reactions, lambda { |input|
     begin
-      input[:course_full_info].reviews.each { |review|
+      all_review_reactions = {}
+
+      input[:course_full_info].reviews.each do |review|
         result =
           HTTP.get(
             "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
             "/review/reactions/#{review.id}"
           )
 
-        
-      }
+        api_review_reactions = ReviewReactionsResultRepresenter.new(
+          ReviewReactionsResult.new
+        ).from_json(
+          result.body
+        ).reactions
+
+        review_reactions = {}
+
+        api_review_reactions.each do |api_review_reaction|
+          review_reactions[api_review_reaction.type.to_sym] =
+            api_review_reaction.count
+        end
+
+        all_review_reactions[review.id.to_s.to_sym] = review_reactions
+      end
+
+      input[:course_full_info].all_review_reactions = all_review_reactions
 
       Right(input)
     rescue
@@ -204,6 +221,7 @@ class GetCourseFullInfo
       step :get_course_difficulty_rating
       step :get_course_reviews
       step :get_reactions
+      step :get_all_review_reactions
       step :return_course_full_info
     end.call(params)
   end

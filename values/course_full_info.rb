@@ -8,5 +8,6 @@ CourseFullInfo =
     :helpfulness_rating,
     :difficulty_rating,
     :reviews,
-    :reactions
+    :reactions,
+    :all_review_reactions
   )
