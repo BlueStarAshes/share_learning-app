@@ -13,7 +13,8 @@ class CourseFullInfoView
     :prerequisites,
     :helpfulness_rating,
     :difficulty_rating,
-    :reviews
+    :reviews,
+    :reactions
   )
 
   def initialize(course_full_info)
@@ -27,5 +28,6 @@ class CourseFullInfoView
     @helpfulness_rating = course_full_info.helpfulness_rating
     @difficulty_rating = course_full_info.difficulty_rating
     @reviews = course_full_info.reviews
+    @reactions = course_full_info.reactions
   end
 end
