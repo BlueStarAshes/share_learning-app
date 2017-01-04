@@ -169,6 +169,28 @@ class GetCourseFullInfo
     end
   }
 
+  register :get_review_reactions, lambda { |input|
+    begin
+      input[:course_full_info].reviews.each { |review|
+        result =
+          HTTP.get(
+            "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+            "/review/reactions/#{review.id}"
+          )
+
+        
+      }
+
+      Right(input)
+    rescue
+      Left(
+        Error.new(
+          'Unable to retrieve review reactions'
+        )
+      )
+    end
+  }
+
   register :return_course_full_info, lambda { |input|
     Right(input[:course_full_info])
   }
