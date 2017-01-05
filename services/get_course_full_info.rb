@@ -9,7 +9,9 @@ class GetCourseFullInfo
     course_id = params[:course_id]
 
     if course_id
-      Right(course_id: course_id, course_full_info: CourseFullInfo.new)
+      course_full_info = CourseFullInfo.new
+      course_full_info.course_id = course_id
+      Right(course_id: course_id, course_full_info: course_full_info)
     else
       Left(Error.new('Course id cannot be empty'))
     end
@@ -125,7 +127,6 @@ class GetCourseFullInfo
           "/course/#{course_id}/reviews"
         )
 
-      # TODO: implement value and representer objects for course reviews
       input[:course_full_info].reviews =
         CourseReviewsResultRepresenter.new(
           CourseReviewsResult.new
@@ -143,6 +144,72 @@ class GetCourseFullInfo
     end
   }
 
+  register :get_reactions, lambda { |input|
+    begin
+      result =
+        HTTP.get(
+          "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+          '/reactions'
+        )
+
+      input[:course_full_info].reactions =
+        ReactionsResultRepresenter.new(
+          ReactionsResult.new
+        ).from_json(
+          result.body
+        ).reactions
+
+      Right(input)
+    rescue
+      Left(
+        Error.new(
+          'Unable to retrieve reactions'
+        )
+      )
+    end
+  }
+
+  register :get_all_review_reactions, lambda { |input|
+    begin
+      all_review_reactions = {}
+
+      if input[:course_full_info].reviews
+        input[:course_full_info].reviews.each do |review|
+          result =
+            HTTP.get(
+              "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+              "/review/reactions/#{review.id}"
+            )
+
+          api_review_reactions = ReviewReactionsResultRepresenter.new(
+            ReviewReactionsResult.new
+          ).from_json(
+            result.body
+          ).reactions
+
+          review_reactions = {}
+
+          api_review_reactions.each do |api_review_reaction|
+            review_reactions[api_review_reaction.type.to_sym] =
+              api_review_reaction.count
+          end
+
+          all_review_reactions[review.id.to_s.to_sym] = review_reactions
+        end
+      end
+
+      input[:course_full_info].all_review_reactions = all_review_reactions
+
+      Right(input)
+    rescue
+      Left(
+        Error.new(
+          'Unable to retrieve review reactions'
+        )
+      )
+    end
+  }
+
   register :return_course_full_info, lambda { |input|
     Right(input[:course_full_info])
   }
@@ -155,6 +222,8 @@ class GetCourseFullInfo
       step :get_course_helpfulness_rating
       step :get_course_difficulty_rating
       step :get_course_reviews
+      step :get_reactions
+      step :get_all_review_reactions
       step :return_course_full_info
     end.call(params)
   end

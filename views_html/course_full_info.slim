@@ -66,14 +66,16 @@ div class="table-container"
       h3 class="pull-left" Review
   div class="row"
     div class="col-md-12"
-      form
+      form role="form" action="/course_full_info/new_review" method='post' id='new_review_form'
         div class="form-group"
-          textarea class="form-control" rows="5" placeholder="Post your review..."
+          textarea name="review_content" class="form-control" rows="5" placeholder="Post your review..."
+          input{type="hidden"
+          name="course_id"
+          value="#{@data.course_id}"
+          }
           input{type="submit"
-          name="new_review"
           class="btn btn-primary btn-sm pull-right margin-tb-10"
-          value="Send"
-          onclick=""
+          value="Add"
           }
   - if @data.reviews
     div class="row"
@@ -98,19 +100,26 @@ div class="table-container"
         - @data.reviews.each do |review|
           tr
             td class="col-md-1"
-              button[
-                type="button"
-                class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
-                onclick=""
-              ]
-                i class="em em---1"
-                span class="badge margin-l-5" 7
-              button[
-                type="button"
-                class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
-                onclick=""
-              ]
-                i class="em em-grinning"
-                span class="badge margin-l-5" 5
+              - @data.reactions.each do |reaction|
+                form role="form" action="/course_full_info/new_review_reaction" method='post' id='new_review_reaction_form'
+                  input{type="hidden"
+                  name="course_id"
+                  value="#{@data.course_id}"
+                  }
+                  input{type="hidden"
+                  name="review_id"
+                  value="#{review.id}"
+                  }
+                  input{type="hidden"
+                  name="reaction_id"
+                  value="#{reaction.id}"
+                  }
+                  button[
+                    type="submit"
+                    class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+                    onclick=""
+                  ]
+                    i class="#{ reaction.emoji }"
+                    span class="badge margin-l-5" #{ @data.all_review_reactions[review.id.to_s.to_sym][reaction.type.to_sym].to_i }
             td class="col-md-11"
-              p class="text-left pull-left" #{review.content}
+              p class="text-left pull-left white-space-prewrapped" #{review.content}

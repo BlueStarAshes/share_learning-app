@@ -16,4 +16,35 @@ class ShareLearningApp < Sinatra::Base
       redirect '/'
     end
   end
+
+  post '/course_full_info/new_review' do
+    new_course_review = NewCourseReview.call(params)
+    result = AddCourseReview.call(
+      course_id: new_course_review[:course_id],
+      content: new_course_review[:review_content]
+    )
+
+    if result.success?
+      flash[:notice] = 'Review successfully added'
+    else
+      flash[:error] = result.value.message
+    end
+
+    redirect "/course_full_info?course_id=#{new_course_review[:course_id]}"
+  end
+
+  post '/course_full_info/new_review_reaction' do
+    new_course_review_reaction = NewCourseReviewReaction.call(params)
+    result = AddCourseReviewReaction.call(
+      course_id: new_course_review_reaction[:course_id],
+      review_id: new_course_review_reaction[:review_id],
+      reaction_id: new_course_review_reaction[:reaction_id]
+    )
+
+    unless result.success?
+      flash[:error] = result.value.message
+    end
+
+    redirect "/course_full_info?course_id=#{new_course_review_reaction[:course_id]}"
+  end
 end
