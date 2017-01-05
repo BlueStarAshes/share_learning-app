@@ -47,4 +47,21 @@ class ShareLearningApp < Sinatra::Base
 
     redirect "/course_full_info?course_id=#{new_course_review_reaction[:course_id]}"
   end
+
+  post '/course_full_info/new_prerequisite' do
+    new_prerequisite = Prerequisite.call(params)
+    print new_prerequisite[:course_id]
+    result = AddCoursePrerequisite.call(
+      course_id: new_prerequisite[:course_id],
+      prerequisite: new_prerequisite[:course_name]
+    )
+
+    if result.success?
+      flash[:notice] = 'Prerequisite successfully added'
+    else
+      flash[:error] = result.value.message
+    end
+
+    redirect "/course_full_info?course_id=#{new_prerequisite[:course_id]}"
+  end  
 end
