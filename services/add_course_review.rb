@@ -10,7 +10,7 @@ class AddCourseReview
       Right(input)
     else
       Left(
-        Error.new("Course ID cannot be empty!;#{input[:content]}")
+        Error.new('Course ID cannot be empty!')
       )
     end
   }

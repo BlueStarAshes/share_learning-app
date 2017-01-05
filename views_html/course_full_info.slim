@@ -79,12 +79,25 @@ div class="table-container"
           tr
             td class="col-md-1"
               - @data.reactions.each do |reaction|
-                button[
-                  type="button"
-                  class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
-                  onclick=""
-                ]
-                  i class="#{ reaction.emoji }"
-                  span class="badge margin-l-5" #{ @data.all_review_reactions[review.id.to_s.to_sym][reaction.type.to_sym].to_i }
+                form role="form" action="/course_full_info/new_review_reaction" method='post' id='new_review_reaction_form'
+                  input{type="hidden"
+                  name="course_id"
+                  value="#{@data.course_id}"
+                  }
+                  input{type="hidden"
+                  name="review_id"
+                  value="#{review.id}"
+                  }
+                  input{type="hidden"
+                  name="reaction_id"
+                  value="#{reaction.id}"
+                  }
+                  button[
+                    type="submit"
+                    class="btn btn-success btn-sm margin-tb-2 margin-rl-2"
+                    onclick=""
+                  ]
+                    i class="#{ reaction.emoji }"
+                    span class="badge margin-l-5" #{ @data.all_review_reactions[review.id.to_s.to_sym][reaction.type.to_sym].to_i }
             td class="col-md-11"
               p class="text-left pull-left white-space-prewrapped" #{review.content}
