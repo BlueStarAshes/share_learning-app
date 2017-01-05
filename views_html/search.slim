@@ -22,8 +22,7 @@ div class="table-container"
   table class="table table-filter" id="course_table"
     tbody 
       - @data&.udacity_courses&.each&.with_index do |course, index|
-        tr class="course_row clickable" 
-          a href="/course_full_info?course_id=#{course.id}"       
+        tr class="course_row" data-href="/course_full_info?course_id=#{course.id}"      
             td 
               td 
                 div class="media"
@@ -50,8 +49,7 @@ div class="table-container"
                 }
 
       - @data&.coursera_courses&.each&.with_index do |course, index|
-        tr class="course_row clickable"
-          a href="/course_full_info?course_id=#{course.id}"       
+        tr class="course_row" data-href="/course_full_info?course_id=#{course.id}"      
             td 
               td 
                 div class="media"
@@ -78,8 +76,7 @@ div class="table-container"
                 }
  
       - @data&.youtube_courses&.each&.with_index do |course, index|
-        tr class="course_row"
-          a href="/course_full_info?course_id=#{course.id}"  
+        tr class="course_row" data-href="/course_full_info?course_id=#{course.id}" 
             td 
             td
               div class="media"
