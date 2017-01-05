@@ -62,16 +62,26 @@ html
       .white-space-prewrapped {
         white-space: pre-wrap;
       }
-  body
-    / JQuery and Bootstrap JS
+      
+    / JQuery 
     script{
       src="https://code.jquery.com/jquery-1.12.4.min.js"
       integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
       crossorigin="anonymous"
-    }
+    }      
+    javascript:
+      $(document).ready(function($) {
+          $(".course_row").click(function() {
+              window.document.location = $(this).data("href");
+          });
+      });
+
+  body
+    /Bootstrap JS
     script{
       src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
     }
+
     / == slim :nav
     .container id='html_body' style="text-align: center;"
       h1 ShareLearning
