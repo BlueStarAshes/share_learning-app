@@ -20,11 +20,33 @@ div class="row"
                 li #{prerequisite.course_name}
       div class="text-left"
         h4 id="course_helpfulness_header" Helpfulness
-        ul
+        span.rating
+          input#rating5 name="helpfulness_rating" type="radio" value="5" /
+          label for="rating5"  5
+          input#rating4 name="helpfulness_rating" type="radio" value="4" /
+          label for="rating4"  4
+          input#rating3 name="helpfulness_rating" type="radio" value="3" /
+          label for="rating3"  3
+          input#rating2 name="helpfulness_rating" type="radio" value="2" /
+          label for="rating2"  2
+          input#rating1 name="helpfulness_rating" type="radio" value="1" /
+          label for="rating1"  1 
+        ul        
           - if @data.helpfulness_rating
             li #{@data.helpfulness_rating} / 5
       div class="text-left"
         h4 id="course_difficulty_header" Difficulty
+        span.rating
+          input#rating5 name="difficulty_rating" type="radio" value="5" /
+          label for="rating5"  5
+          input#rating4 name="difficulty_rating" type="radio" value="4" /
+          label for="rating4"  4
+          input#rating3 name="difficulty_rating" type="radio" value="3" /
+          label for="rating3"  3
+          input#rating2 name="difficulty_rating" type="radio" value="2" /
+          label for="rating2"  2
+          input#rating1 name="difficulty_rating" type="radio" value="1" /
+          label for="rating1"  1         
         ul
           - if @data.difficulty_rating
             li #{@data.difficulty_rating} / 5
