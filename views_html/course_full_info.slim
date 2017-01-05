@@ -33,7 +33,7 @@ div class="row"
           label for="rating1"  1 
         ul
           - if @data.helpfulness_rating
-            li #{@data.helpfulness_rating} / 5
+            li #{@data.helpfulness_rating} / 5.0
       div class="text-left"
         h4 id="course_difficulty_header" Difficulty
         span.rating
@@ -49,7 +49,7 @@ div class="row"
           label for="rating1"  1         
         ul
           - if @data.difficulty_rating
-            li #{@data.difficulty_rating} / 5
+            li #{@data.difficulty_rating} / 5.0
       div class="text-left"
         h4 id="course_source_header" Source
         ul
