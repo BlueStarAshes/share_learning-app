@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Post a new course review through API
+# Post a new course prerequisite through API
 class AddCoursePrerequisite
   extend Dry::Monads::Either::Mixin
   extend Dry::Container::Mixin
