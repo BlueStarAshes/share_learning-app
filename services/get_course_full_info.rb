@@ -173,27 +173,29 @@ class GetCourseFullInfo
     begin
       all_review_reactions = {}
 
-      input[:course_full_info].reviews.each do |review|
-        result =
-          HTTP.get(
-            "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
-            "/review/reactions/#{review.id}"
-          )
+      if input[:course_full_info].reviews
+        input[:course_full_info].reviews.each do |review|
+          result =
+            HTTP.get(
+              "#{ShareLearningApp.config.SHARE_LEARNING_API}" \
+              "/review/reactions/#{review.id}"
+            )
 
-        api_review_reactions = ReviewReactionsResultRepresenter.new(
-          ReviewReactionsResult.new
-        ).from_json(
-          result.body
-        ).reactions
+          api_review_reactions = ReviewReactionsResultRepresenter.new(
+            ReviewReactionsResult.new
+          ).from_json(
+            result.body
+          ).reactions
 
-        review_reactions = {}
+          review_reactions = {}
 
-        api_review_reactions.each do |api_review_reaction|
-          review_reactions[api_review_reaction.type.to_sym] =
-            api_review_reaction.count
+          api_review_reactions.each do |api_review_reaction|
+            review_reactions[api_review_reaction.type.to_sym] =
+              api_review_reaction.count
+          end
+
+          all_review_reactions[review.id.to_s.to_sym] = review_reactions
         end
-
-        all_review_reactions[review.id.to_s.to_sym] = review_reactions
       end
 
       input[:course_full_info].all_review_reactions = all_review_reactions
