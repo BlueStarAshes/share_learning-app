@@ -31,6 +31,7 @@ div class="row"
             } +       
       div class="text-left"
         h4 id="course_helpfulness_header" Helpfulness
+      
         form role="form" action="/rate_helpfulness" method='post' id='rate-helpfulness-form'
           span.rating
             input#helpfulness_rating5 name="helpfulness_rating" type="radio" value="5" /
@@ -52,6 +53,10 @@ div class="row"
         ul
           - if @data.helpfulness_rating
             li #{@data.helpfulness_rating} / 5.0
+            - for i in (1..@data.helpfulness_rating.to_i)
+                javascript:
+                  $("#helpfulness_rating#{i}").attr("checked",true);
+
       div class="text-left"
         h4 id="course_difficulty_header" Difficulty
         form role="form" action="/rate_difficulty" method='post' id='rate-difficulty-form'
@@ -75,6 +80,10 @@ div class="row"
         ul
           - if @data.difficulty_rating
             li #{@data.difficulty_rating} / 5.0
+            - for i in (1..@data.difficulty_rating.to_i)
+                javascript:
+                  $("#difficulty_rating#{i}").attr("checked",true);
+
       div class="text-left"
         h4 id="course_source_header" Source
         ul
