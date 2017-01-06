@@ -13,11 +13,22 @@ div class="row"
   div class="col-md-9"
     div class="margin-tb-10"
       div class="text-left"
-        h4 id="course_prerequisite_header" Prerequisite
-        ul
-          - if @data.prerequisites
-            - @data.prerequisites.each do |prerequisite|
-                li #{prerequisite.course_name}
+        div class="row"
+          h4 id="course_prerequisite_header" &nbsp;&nbsp;&nbsp;&nbsp;Prerequisite
+          div class="col-lg-4"
+            ul
+              - if @data.prerequisites
+                - @data.prerequisites.each do |prerequisite|
+                    li #{prerequisite.course_name}
+          div class="col-lg-1"
+          div class="col-lg-2"
+            button{
+              name="new_group"
+              type="button"
+              class="btn btn-success btn-xs"
+              data-toggle="modal"
+              data-target="#newPrerequisiteModal"
+            } +       
       div class="text-left"
         h4 id="course_helpfulness_header" Helpfulness
         form role="form" action="/rate_helpfulness" method='post' id='rate-helpfulness-form'
@@ -138,3 +149,5 @@ div class="table-container"
                     span class="badge margin-l-5" #{ @data.all_review_reactions[review.id.to_s.to_sym][reaction.type.to_sym].to_i }
             td class="col-md-11"
               p class="text-left pull-left white-space-prewrapped" #{review.content}
+
+include :new_prerequisite_modal
