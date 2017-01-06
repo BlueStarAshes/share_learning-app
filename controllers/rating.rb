@@ -10,15 +10,7 @@ class ShareLearningApp < Sinatra::Base
     helpfulness_rating = Rating.call(params)
      
     if helpfulness_rating.success? 
-      results = helpfulness_rating.value 
-      # @data = CourseDetailsView.new(results)
-      
-      # if @data.udacity_count.nonzero? || @data.coursera_count.nonzero? \
-      #  || @data.youtube_count.nonzero?
-      #   @keyword = search_keyword.output[:search_keyword]
-      # else
-      #   flash.now[:error] = 'Course not found'
-      # end
+      flash[:notice] = 'Successfully rate the helpfulness of the course'
       redirect "/course_full_info?course_id=#{params[:course_id]}"
 
     else
@@ -26,4 +18,6 @@ class ShareLearningApp < Sinatra::Base
        redirect "/course_full_info?course_id=#{params[:course_id]}"
     end
   end
+
+  
 end

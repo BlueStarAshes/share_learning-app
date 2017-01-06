@@ -13,9 +13,9 @@ class Rating
     begin
       results = HTTP.post(
         "#{ShareLearningApp.config.SHARE_LEARNING_API}/#{type}/#{course_id}", 
-        json: { rating: rating }
-      )
-      puts results
+        json: { rating: rating.to_i }
+      )      
+
       Right(results.body)
     rescue
       Left(Error.new('Cannot rate course helpfulness'))
