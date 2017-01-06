@@ -31,14 +31,59 @@ div class="row"
             } +       
       div class="text-left"
         h4 id="course_helpfulness_header" Helpfulness
+      
+        form role="form" action="/rate_helpfulness" method='post' id='rate-helpfulness-form'
+          span.rating
+            input#helpfulness_rating5 name="helpfulness_rating" type="radio" value="5" /
+            label for="helpfulness_rating5"  5
+            input#helpfulness_rating4 name="helpfulness_rating" type="radio" value="4" /
+            label for="helpfulness_rating4"  4
+            input#helpfulness_rating3 name="helpfulness_rating" type="radio" value="3" /
+            label for="helpfulness_rating3"  3
+            input#helpfulness_rating2 name="helpfulness_rating" type="radio" value="2" /
+            label for="helpfulness_rating2"  2
+            input#helpfulness_rating1 name="helpfulness_rating" type="radio" value="1" /
+            label for="helpfulness_rating1"  1 
+
+            input{
+              type="hidden"
+              name="course_id"
+              value="#{@data.course_id}"
+            }
         ul
           - if @data.helpfulness_rating
-            li #{@data.helpfulness_rating} / 5
+            li #{@data.helpfulness_rating} / 5.0
+            - for i in (1..@data.helpfulness_rating.to_i)
+                javascript:
+                  $("#helpfulness_rating#{i}").attr("checked",true);
+
       div class="text-left"
         h4 id="course_difficulty_header" Difficulty
+        form role="form" action="/rate_difficulty" method='post' id='rate-difficulty-form'
+          span.rating
+            input#difficulty_rating5 name="difficulty_rating" type="radio" value="5" /
+            label for="difficulty_rating5"  5
+            input#difficulty_rating4 name="difficulty_rating" type="radio" value="4" /
+            label for="difficulty_rating4"  4
+            input#difficulty_rating3 name="difficulty_rating" type="radio" value="3" /
+            label for="difficulty_rating3"  3
+            input#difficulty_rating2 name="difficulty_rating" type="radio" value="2" /
+            label for="difficulty_rating2"  2
+            input#difficulty_rating1 name="difficulty_rating" type="radio" value="1" /
+            label for="difficulty_rating1"  1   
+
+            input{
+              type="hidden"
+              name="course_id"
+              value="#{@data.course_id}"
+            }
         ul
           - if @data.difficulty_rating
-            li #{@data.difficulty_rating} / 5
+            li #{@data.difficulty_rating} / 5.0
+            - for i in (1..@data.difficulty_rating.to_i)
+                javascript:
+                  $("#difficulty_rating#{i}").attr("checked",true);
+
       div class="text-left"
         h4 id="course_source_header" Source
         ul
@@ -49,6 +94,7 @@ div class="row"
       div class="text-left"
         h4 id="course_link_header" Link
         a href=="#{@data.link}" target="_new" id="course_link" Click here to visit the course
+
 div class="table-container"
   div class="row"
     div class="col-md-12"
