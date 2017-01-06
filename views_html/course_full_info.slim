@@ -20,7 +20,7 @@ div class="row"
                 li #{prerequisite.course_name}
       div class="text-left"
         h4 id="course_helpfulness_header" Helpfulness
-        form role="form" action="/rate_helpfulness" method='get' id='rate-helpfulness-form'
+        form role="form" action="/rate_helpfulness" method='post' id='rate-helpfulness-form'
           span.rating
             input#rating5 name="helpfulness_rating" type="radio" value="5" /
             label for="rating5"  5
@@ -32,6 +32,12 @@ div class="row"
             label for="rating2"  2
             input#rating1 name="helpfulness_rating" type="radio" value="1" /
             label for="rating1"  1 
+
+            input{
+              type="hidden"
+              name="course_id"
+              value="#{@data.course_id}"
+            }
         ul
           - if @data.helpfulness_rating
             li #{@data.helpfulness_rating} / 5.0
@@ -48,7 +54,13 @@ div class="row"
             input#rating2 name="difficulty_rating" type="radio" value="2" /
             label for="rating2"  2
             input#rating1 name="difficulty_rating" type="radio" value="1" /
-            label for="rating1"  1         
+            label for="rating1"  1   
+
+            input{
+              type="hidden"
+              name="course_id"
+              value="#{@data.course_id}"
+            }
         ul
           - if @data.difficulty_rating
             li #{@data.difficulty_rating} / 5.0
@@ -62,6 +74,7 @@ div class="row"
       div class="text-left"
         h4 id="course_link_header" Link
         a href=="#{@data.link}" target="_new" id="course_link" Click here to visit the course
+
 div class="table-container"
   div class="row"
     div class="col-md-12"

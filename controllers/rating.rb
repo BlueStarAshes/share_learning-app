@@ -5,23 +5,25 @@ class ShareLearningApp < Sinatra::Base
   extend Econfig::Shortcut
 
   post "/rate_helpfulness" do
-    helpfulness_rating = Rating.call(params, 'helpfulness')
+    params['type'] = 'helpful'
+    puts params
+    helpfulness_rating = Rating.call(params)
      
-    if course_details.success? 
-      results = course_details.value 
-      @data = CourseDetailsView.new(results)
+    if helpfulness_rating.success? 
+      results = helpfulness_rating.value 
+      # @data = CourseDetailsView.new(results)
       
-      if @data.udacity_count.nonzero? || @data.coursera_count.nonzero? \
-       || @data.youtube_count.nonzero?
-        @keyword = search_keyword.output[:search_keyword]
-      else
-        flash.now[:error] = 'Course not found'
-      end
-      slim :search
+      # if @data.udacity_count.nonzero? || @data.coursera_count.nonzero? \
+      #  || @data.youtube_count.nonzero?
+      #   @keyword = search_keyword.output[:search_keyword]
+      # else
+      #   flash.now[:error] = 'Course not found'
+      # end
+      redirect "/course_full_info?course_id=#{params[:course_id]}"
 
     else
-       flash[:error] = course_details.value.message
-       redirect '/'
+       flash[:error] = helpfulness_rating.value.message
+       redirect "/course_full_info?course_id=#{params[:course_id]}"
     end
   end
 end

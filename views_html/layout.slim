@@ -20,6 +20,8 @@ html
       type='text/css'
     }
 
+    / Review CSS
+
     css:
       .table-filter tbody tr:hover {
         cursor: pointer;
@@ -79,6 +81,14 @@ html
           $(".course_row").click(function() {
               window.document.location = $(this).data("href");
           });
+
+         $("input[name=helpfulness_rating]").change(function(){
+              $("#rate-helpfulness-form").submit();
+         });  
+
+         $("input[name=difficulty_rating]").change(function(){
+              $("#rate-difficulty-form").submit();
+         });                   
       });
 
   body
