@@ -22,16 +22,16 @@ div class="row"
         h4 id="course_helpfulness_header" Helpfulness
         form role="form" action="/rate_helpfulness" method='post' id='rate-helpfulness-form'
           span.rating
-            input#rating5 name="helpfulness_rating" type="radio" value="5" /
-            label for="rating5"  5
-            input#rating4 name="helpfulness_rating" type="radio" value="4" /
-            label for="rating4"  4
-            input#rating3 name="helpfulness_rating" type="radio" value="3" /
-            label for="rating3"  3
-            input#rating2 name="helpfulness_rating" type="radio" value="2" /
-            label for="rating2"  2
-            input#rating1 name="helpfulness_rating" type="radio" value="1" /
-            label for="rating1"  1 
+            input#helpfulness_rating5 name="helpfulness_rating" type="radio" value="5" /
+            label for="helpfulness_rating5"  5
+            input#helpfulness_rating4 name="helpfulness_rating" type="radio" value="4" /
+            label for="helpfulness_rating4"  4
+            input#helpfulness_rating3 name="helpfulness_rating" type="radio" value="3" /
+            label for="helpfulness_rating3"  3
+            input#helpfulness_rating2 name="helpfulness_rating" type="radio" value="2" /
+            label for="helpfulness_rating2"  2
+            input#helpfulness_rating1 name="helpfulness_rating" type="radio" value="1" /
+            label for="helpfulness_rating1"  1 
 
             input{
               type="hidden"
@@ -43,18 +43,18 @@ div class="row"
             li #{@data.helpfulness_rating} / 5.0
       div class="text-left"
         h4 id="course_difficulty_header" Difficulty
-        form role="form" action="/rate_difficulty" method='get' id='rate-difficulty-form'
+        form role="form" action="/rate_difficulty" method='post' id='rate-difficulty-form'
           span.rating
-            input#rating5 name="difficulty_rating" type="radio" value="5" /
-            label for="rating5"  5
-            input#rating4 name="difficulty_rating" type="radio" value="4" /
-            label for="rating4"  4
-            input#rating3 name="difficulty_rating" type="radio" value="3" /
-            label for="rating3"  3
-            input#rating2 name="difficulty_rating" type="radio" value="2" /
-            label for="rating2"  2
-            input#rating1 name="difficulty_rating" type="radio" value="1" /
-            label for="rating1"  1   
+            input#difficulty_rating5 name="difficulty_rating" type="radio" value="5" /
+            label for="difficulty_rating5"  5
+            input#difficulty_rating4 name="difficulty_rating" type="radio" value="4" /
+            label for="difficulty_rating4"  4
+            input#difficulty_rating3 name="difficulty_rating" type="radio" value="3" /
+            label for="difficulty_rating3"  3
+            input#difficulty_rating2 name="difficulty_rating" type="radio" value="2" /
+            label for="difficulty_rating2"  2
+            input#difficulty_rating1 name="difficulty_rating" type="radio" value="1" /
+            label for="difficulty_rating1"  1   
 
             input{
               type="hidden"

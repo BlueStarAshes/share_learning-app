@@ -8,7 +8,11 @@ class Rating
   register :call_api_to_create_rating, lambda { |params|
   	type = params['type']
   	course_id = params['course_id']
-  	rating = params['helpfulness_rating']
+  	if !params['helpfulness_rating'].nil?
+  	  rating = params['helpfulness_rating']
+  	elsif !params['difficulty_rating'].nil?
+  		rating = params['difficulty_rating']
+  	end  		
 
     begin
       results = HTTP.post(
@@ -18,7 +22,12 @@ class Rating
 
       Right(results.body)
     rescue
-      Left(Error.new('Cannot rate course helpfulness'))
+      if type == 'helpful'
+      	Left(Error.new('Cannot rate course helpfulness'))
+      elsif type == 'difficulty'
+      	Left(Error.new('Cannot rate course difficulty'))
+      end
+      	
     end
   }
 
