@@ -52,10 +52,13 @@ div class="row"
             }
         ul
           - if @data.helpfulness_rating
-            li #{@data.helpfulness_rating} / 5.0
+            li #{@data.helpfulness_rating.round(1)} / 5.0
             - for i in (1..@data.helpfulness_rating.to_i)
                 javascript:
                   $("#helpfulness_rating#{i}").attr("checked",true);
+            - if @data.helpfulness_rating - i >= 0.5
+                javascript:
+                  $("#helpfulness_rating#{i+1}").attr("checked",true);                  
 
       div class="text-left"
         h4 id="course_difficulty_header" Difficulty
@@ -79,10 +82,13 @@ div class="row"
             }
         ul
           - if @data.difficulty_rating
-            li #{@data.difficulty_rating} / 5.0
+            li #{@data.difficulty_rating.round(1)} / 5.0
             - for i in (1..@data.difficulty_rating.to_i)
                 javascript:
                   $("#difficulty_rating#{i}").attr("checked",true);
+            - if @data.difficulty_rating - i >= 0.5
+                javascript:
+                  $("#difficulty_rating#{i+1}").attr("checked",true);
 
       div class="text-left"
         h4 id="course_source_header" Source
