@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 require 'sinatra'
+require "sinatra/cookies"
 require 'slim/include'
 require 'econfig'
 require 'http'
