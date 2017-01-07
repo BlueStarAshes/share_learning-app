@@ -9,7 +9,8 @@ class ShareLearningApp < Sinatra::Base
     params['type'] = 'helpful'
     puts params
 
-    if "#{cookies[:rate_helpfulness]}" == 'true'
+    cookie_name = 'rate_helpfulness_' + params['course_id']
+    if "#{cookies[cookie_name]}" == 'true'
       flash[:error] = 'Have rated the helpfulness of the course'
       redirect "/course_full_info?course_id=#{params[:course_id]}"
     else
@@ -17,7 +18,7 @@ class ShareLearningApp < Sinatra::Base
 
       if helpfulness_rating.success? 
         flash[:notice] = 'Successfully rate the helpfulness of the course'
-        cookies[:rate_helpfulness] = 'true'
+        cookies[cookie_name] = 'true'
         redirect "/course_full_info?course_id=#{params[:course_id]}"
 
       else
@@ -31,7 +32,8 @@ class ShareLearningApp < Sinatra::Base
     params['type'] = 'difficulty'
     puts params
 
-    if "#{cookies[:rate_difficulty]}" == 'true'
+    cookie_name = 'rate_difficulty_' + params['course_id']
+    if "#{cookies[cookie_name]}" == 'true'
       flash[:error] = 'Have rated the difficulty of the course'
       redirect "/course_full_info?course_id=#{params[:course_id]}"
     else      
@@ -39,7 +41,7 @@ class ShareLearningApp < Sinatra::Base
        
       if difficulty_rating.success? 
         flash[:notice] = 'Successfully rate the difficulty of the course'
-        cookies[:rate_difficulty] = 'true'
+        cookies[cookie_name] = 'true'
         redirect "/course_full_info?course_id=#{params[:course_id]}"
 
       else
