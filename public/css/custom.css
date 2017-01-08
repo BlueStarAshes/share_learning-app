@@ -23,6 +23,11 @@
   margin-left: 30px;
   color: #696969;
 }
+.title a:link{
+  text-decoration:none; 
+}
+a:link {color:black;} 
+a:visited {color:black;}
 .margin-rl-2 {
   margin-right: 2px;
   margin-left: 2px;
