@@ -26,8 +26,8 @@
 .title a:link{
   text-decoration:none; 
 }
-a:link {color:black;} 
-a:visited {color:black;}
+.title a:link {color:black;} 
+.title a:visited {color:black;}
 .margin-rl-2 {
   margin-right: 2px;
   margin-left: 2px;
