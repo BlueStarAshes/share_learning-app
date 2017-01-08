@@ -20,14 +20,60 @@ html
       type='text/css'
     }
 
-    / Custom CSS
-    link{
-      href='css/custom.css'
-      rel='stylesheet'
-      type='text/css'
-    }
-    
-      
+    / Review CSS
+
+    css:
+      .table-filter tbody tr:hover {
+        cursor: pointer;
+        background-color: #eee;
+      }    
+      .table-filter .media .title{
+        color: #696969;
+        font-size: 18px;
+        font-weight: bold;
+        line-height: normal;
+        margin: 0;
+      }
+      .table-filter .source{
+        color: #00008B;
+        margin-buttom:50:px
+      }
+      .table-filter .media .title h4 {
+        margin-right: 10px;
+        margin-left: 30px;
+      }
+      .table-filter .media .summary {
+        font-size: 14px;
+        margin-right: 30px;
+        margin-left: 30px;
+        color: #696969;
+      }
+      .margin-rl-2 {
+        margin-right: 2px;
+        margin-left: 2px;
+      }
+      .margin-r-10 {
+        margin-right: 10px;
+      }
+      .margin-l-5 {
+        margin-left: 5px;
+      }
+      .margin-tb-10 {
+        margin-top: 10px;
+        margin-bottom: 10px;
+      }
+      .margin-tb-2 {
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+      .white-space-prewrapped {
+        white-space: pre-wrap;
+      }
+      .title a:link{
+        text-decoration:none; 
+      }
+      a:link {color:black;} 
+      a:visited {color:black;}   
     / JQuery 
     script{
       src="https://code.jquery.com/jquery-1.12.4.min.js"
@@ -40,11 +86,11 @@ html
               window.document.location = $(this).data("href");
           });
 
-         $("input[name=helpfulness_rating]").click(function(){
+         $("input[name=helpfulness_rating]").change(function(){
               $("#rate-helpfulness-form").submit();
          });  
 
-         $("input[name=difficulty_rating]").click(function(){
+         $("input[name=difficulty_rating]").change(function(){
               $("#rate-difficulty-form").submit();
          });                   
       });
@@ -57,7 +103,8 @@ html
 
     / == slim :nav
     .container id='html_body' style="text-align: center;"
-      h1 ShareLearning
+      h1 class='title'
+        a href="/" ShareLearning
 
       section
         include :flash_bar
