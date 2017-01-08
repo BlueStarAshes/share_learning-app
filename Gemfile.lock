@@ -3,6 +3,7 @@ GEM
   specs:
     addressable (2.5.0)
       public_suffix (~> 2.0, >= 2.0.2)
+    backports (3.6.8)
     bond (0.5.1)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
@@ -132,6 +133,13 @@ GEM
       rack (~> 1.5)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
+    sinatra-contrib (1.4.7)
+      backports (>= 2.0)
+      multi_json
+      rack-protection
+      rack-test
+      sinatra (~> 1.4.0)
+      tilt (>= 1.3, < 3)
     slim (3.0.7)
       temple (~> 0.7.6)
       tilt (>= 1.3.3, < 2.1)
@@ -178,6 +186,7 @@ DEPENDENCIES
   rerun
   roar
   sinatra
+  sinatra-contrib
   slim
   tux
   watir-webdriver
